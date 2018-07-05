@@ -1,9 +1,7 @@
 package com.winbet.controllers;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,12 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.winbet.dao.IAuthentificationJpaRepository;
 import com.winbet.dao.IClientJpaRepository;
 import com.winbet.dao.ISportJpaRepository;
 import com.winbet.entities.Authentification;
 import com.winbet.entities.Client;
+
 import com.winbet.entities.Sport;
 
 @Controller
@@ -38,6 +36,7 @@ public class ClientController {
     private String gotoAccueil(Model model) {
 	List<Sport> listeSports = sportRepo.findAll();
 	model.addAttribute("listeSports", listeSports);
+
 	return "accueil";
     }
 
@@ -50,9 +49,7 @@ public class ClientController {
 
     @PostMapping("/creer")
     public String creer(@Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
-	// dao
-	// new error
-	// result.addError(error);
+
 	if (authentificationRepo.findByEmail(client.getAuthentification().getEmail()) != null) {
 	    ObjectError erreurDoublon = new ObjectError("client.authentification.email", "cet email existe déjà");
 	    result.addError(erreurDoublon);
@@ -65,6 +62,7 @@ public class ClientController {
 	} else {
 	    return "creer";
 	}
+
     }
 
     private static void encodePassword(Authentification authentification) {

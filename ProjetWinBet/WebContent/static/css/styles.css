@@ -1,10 +1,31 @@
-h2 {
-	color: green;
-	font-size: 16pt;
+body{
+font-family:"Gadugi";
+font-size:15px;	
 }
-.error, .errors {
-	color: red;
+
+
+table { 
+    border-spacing: 30px;
+    border-collapse: separate;
 }
-.required {
-	color: red;
+
+.titre {
+font-size:20px;
+color: white;
 }
+
+.une {
+text-align: center;
+text-decoration: underline;
+font-size:35px;
+color: #cc0000;
+font-family:"Impact";
+}
+
+.unedetail {
+text-align: center;
+font-size:25px;
+color: #800000;
+font-family:"Impact";
+}
+
