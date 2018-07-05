@@ -11,6 +11,6 @@ public class SecurityController {
     @GetMapping("/login")
     public String appLogin(@RequestParam(value = "error", required = false) Boolean error,
 	    @RequestParam(value = "logout", required = false) Boolean logout) {
-	return "login";
+	return "authentification";
     }
 }
