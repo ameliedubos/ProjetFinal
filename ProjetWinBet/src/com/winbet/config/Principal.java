@@ -1,6 +1,5 @@
 package com.winbet.config;
 
-
 import java.util.*;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -8,13 +7,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.winbet.entities.Authentification;
-
+import com.winbet.entities.Client;
 
 public class Principal implements UserDetails {
 
     private static final long serialVersionUID = -5270061614463868043L;
 
     private Authentification authentification;
+
+    private Client client;
 
     public Principal(Authentification authentification) {
 	this.authentification = authentification;
