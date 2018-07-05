@@ -10,8 +10,18 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="<c:url value="/static/css/styles.css" />" rel="stylesheet">
+<style>
+body {
+    /* background-image: url("/ProjetWinBet/static/images/multisports.jpg"); */
+    height:1%'
+}
+
+</style>
 </head>
 <body>
+<div background="<c:url value='/ProjetWinBet/static/images/multisports.jpg' />"  height=1px></div>
+
+<body background="/ProjetWinBet/static/images/multisports.jpg">
 	<div align="center">
 		<h1>
 		<br><br>
@@ -93,7 +103,7 @@
 		<br>
 		<div align="center">
 			<input type="submit" class="btn btn-success" value="Valider"
-				align="center" /> <br> <br> <a href="home">Retour</a>
+				align="center" /> <br> <br> <a href="accueil">Retour</a>
 		</div>
 	</form>
 </body>
