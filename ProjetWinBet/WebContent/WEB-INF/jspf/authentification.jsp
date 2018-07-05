@@ -21,7 +21,7 @@
 	<c:if test="${param.logout}">
 		<span class="error"><spring:message code="authentification.logout" /></span>
 	</c:if>
-	<form method="POST" action="<c:url value="/client/accueil" />">
+	<form method="POST" action="<c:url value="/client/goToAccueil" />">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<label for="username"><spring:message code="authentification.username" /></label>
 		<input type="text" name="username" value="">
