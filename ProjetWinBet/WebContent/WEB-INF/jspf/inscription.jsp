@@ -6,15 +6,18 @@
 <html>
 <head>
 <title>Création de compte</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="<c:url value="/static/css/styles.css" />" rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 </head>
 <body>
 	<div align="center">
-		<h2>
-			Création de compte
-		</h2>
+		<h1>
+		<br><br>
+			<spring:message code="inscription.creation" />
+		<br><br>
+		</h1>
 	</div>
 	<br>
 	<form method="POST" action="creer" modelAttribute="client">
@@ -51,39 +54,39 @@
 					<td><form:errors path="client.telephone" cssClass="errors" /></td>
 				</tr>
 				<tr>
-					<td nowrap><form:label path="client.rue">
-							<spring:message code="client.rue" />
+					<td nowrap><form:label path="client.adresse.rue">
+							<spring:message code="client.adresse.rue" />
 						</form:label></td>
-					<td><form:input path="client.rue" class="form-control" /></td>
-					<td><form:errors path="client.rue" cssClass="errors" /></td>
+					<td><form:input path="client.adresse.rue" class="form-control" /></td>
+					<td><form:errors path="client.adresse.rue" cssClass="errors" /></td>
 				</tr>
 				<tr>
-					<td nowrap><form:label path="client.codepostal">
-							<spring:message code="client.codepostal" />
+					<td nowrap><form:label path="client.adresse.code">
+							<spring:message code="client.adresse.code" />
 						</form:label></td>
-					<td><form:input path="client.codepostal" class="form-control" /></td>
-					<td><form:errors path="client.codepostal" cssClass="errors" /></td>
+					<td><form:input path="client.adresse.code" class="form-control" /></td>
+					<td><form:errors path="client.adresse.code" cssClass="errors" /></td>
 				</tr>
 				<tr>
-					<td nowrap><form:label path="client.ville">
-							<spring:message code="client.ville" />
+					<td nowrap><form:label path="client.adresse.ville">
+							<spring:message code="client.adresse.ville" />
 						</form:label></td>
-					<td><form:input path="client.ville" class="form-control" /></td>
-					<td><form:errors path="client.ville" cssClass="errors" /></td>
+					<td><form:input path="client.adresse.ville" class="form-control" /></td>
+					<td><form:errors path="client.adresse.ville" cssClass="errors" /></td>
 				</tr>
 				<tr>
-					<td nowrap><form:label path="client.pays">
-							<spring:message code="client.pays" />
+					<td nowrap><form:label path="client.adresse.pays">
+							<spring:message code="client.adresse.pays" />
 						</form:label></td>
-					<td><form:input path="client.pays" class="form-control" /></td>
-					<td><form:errors path="client.pays" cssClass="errors" /></td>
+					<td><form:input path="client.adresse.pays" class="form-control" /></td>
+					<td><form:errors path="client.adresse.pays" cssClass="errors" /></td>
 				</tr>
 				<tr>
-					<td nowrap><form:label path="client.montantmaxi">
-							<spring:message code="client.montantmaxi" />
+					<td nowrap><form:label path="client.montantMax">
+							<spring:message code="client.montantMax" />
 						</form:label></td>
-					<td><form:input path="client.montantmaxi" class="form-control" /></td>
-					<td><form:errors path="client.montantmaxi" cssClass="errors" /></td>
+					<td><form:input path="client.montantMax" class="form-control" /></td>
+					<td><form:errors path="client.montantMax" cssClass="errors" /></td>
 				</tr>
 			</TABLE>
 		</div>
