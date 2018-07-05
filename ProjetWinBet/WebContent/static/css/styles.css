@@ -1,10 +1,5 @@
-h2 {
-	color: green;
-	font-size: 16pt;
+table { 
+    border-spacing: 15px;
+    border-collapse: separate;
 }
-.error, .errors {
-	color: red;
-}
-.required {
-	color: red;
-}
+
