@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><spring:message code="login.title" /></title>
+<title><spring:message code="authentification.title" /></title>
 <link href="<c:url value="/static/css/styles.css" />" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -13,23 +13,23 @@
 </head>
 <body>
 	<h2>
-		<spring:message code="login.title" />
+		<spring:message code="authentification.title" />
 	</h2>
 	<c:if test="${param.error}">
-		<span class="error"><spring:message code="login.inconnu" /></span>
+		<span class="error"><spring:message code="authentification.inconnu" /></span>
 	</c:if>
 	<c:if test="${param.logout}">
-		<span class="error"><spring:message code="login.logout" /></span>
+		<span class="error"><spring:message code="authentification.logout" /></span>
 	</c:if>
-	<form method="POST" action="<c:url value="/login" />">
+	<form method="POST" action="<c:url value="/client/accueil" />">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		<label for="username"><spring:message code="login.username" /></label>
+		<label for="username"><spring:message code="authentification.username" /></label>
 		<input type="text" name="username" value="">
 		<br>
-		<label for="password"><spring:message code="login.password" /></label>
+		<label for="password"><spring:message code="authentification.password" /></label>
 		<input type="password" name="password" value="">
 		<br>
-		<input type="submit" value="<spring:message code="login.submit" />" />
+		<input type="submit" value="<spring:message code="authentification.submit" />" />
 	</form>
 </body>
 </html>
