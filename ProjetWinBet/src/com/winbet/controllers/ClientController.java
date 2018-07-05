@@ -2,7 +2,6 @@ package com.winbet.controllers;
 
 import javax.validation.Valid;
 
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,38 +14,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.winbet.dao.IClientJpaRepository;
 import com.winbet.entities.Authentification;
 import com.winbet.entities.Client;
-import com.winbet.entities.ERole;
 
 @Controller
 @RequestMapping("/client")
 public class ClientController {
 
-private IClientJpaRepository clientRepo;
+    private IClientJpaRepository clientRepo;
 
-@RequestMapping("/goToAccueil")
-private String gotoAccueil() {
+    @RequestMapping("/goToAccueil")
+    private String gotoAccueil() {
 	return "accueil";
-}
+    }
 
-@GetMapping("/goToCreer")
-public String goToCreer(Model model) {
-model.addAttribute("client", new Client());
-//model.addAttribute("roles", ERole.values());
-return "inscription";
-}
+    @GetMapping("/goToCreer")
+    public String goToCreer(Model model) {
+	model.addAttribute("client", new Client());
+	// model.addAttribute("roles", ERole.values());
+	return "inscription";
+    }
 
-@PostMapping("/creer")
-public String creer(
-    @Valid @ModelAttribute(value = "client") Client client,
-    BindingResult result, Model model) {
-if (!result.hasErrors()) {
-    encodePassword(client.getAuthentification());
-   clientRepo.save(client);
-    model.addAttribute("client", new Client());
-}
-return "creer";
-}
-	
+    @PostMapping("/creer")
+    public String creer(@Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
+	if (!result.hasErrors()) {
+	    encodePassword(client.getAuthentification());
+	    clientRepo.save(client);
+	    model.addAttribute("client", new Client());
+	}
+	return "creer";
+    }
+
     private static void encodePassword(Authentification authentification) {
 	String rawPassword = authentification.getMotDePasse();
 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
