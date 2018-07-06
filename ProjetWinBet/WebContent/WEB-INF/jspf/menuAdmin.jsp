@@ -18,30 +18,34 @@
 
 <div class="container">
 <br><br>
-<h2>Bienvenue sur votre page administrateur Toto</h2>
+<h2>Bienvenue sur votre page administrateur "Nom admin"</h2>
 <br><br>
 <table class="table table-striped">
     <tr>
     <td colspan="4"><h3>Liste des rencontres</h3></td>
     </tr>
-	<c:forEach var = "i" begin = "1" end = "3">
+	<c:forEach items="${listeRencontres}" var="rencontre">
 	    <tr>
-	    <td>Rencontre <c:out value = "${i}"/></td>
-	    <td>Equipe 1</td>
-	    <td>Equipe 2</td>
+	    <td>Rencontre <c:out value = "${rencontre.id}"/><br>
+	    <c:out value = "${rencontre.equipe1.sport.nom}"/>
+	    </td>
+	    <td><c:out value = "${rencontre.equipe1.nom}"/><br>
+	        <c:out value = "${rencontre.cote1}"/>
+	    </td>
+	    <td><c:out value = "${rencontre.equipe2.nom}"/><br>
+	    <c:out value = "${rencontre.cote2}"/>
+	    </td>
 	    <td><a href="<c:url value="/admin/goToCreerRencontre" />">Modifier la rencontre</a></td>
 	    </tr>
       </c:forEach>
      
  </table>    
 
-<%--       <c:forEach items="${listeRencontres}" var="rencontre"> --%>
-<%--  	  <c:out value="${rencontre.equipe}" /><br> --%>
-<%--  	  </c:forEach> --%>
-
 
 <a href="<c:url value="/admin/goToCreerRencontre" />">Créer une rencontre</a>
 <br><br><br>
+<a href="<c:url value="/admin/goToMenuAdmin" />">Retour au menu</a>
+<br>
 <a href="<c:url value="/admin/goToAccueil" />">Retour à l'accueil</a>
 
 </div>
