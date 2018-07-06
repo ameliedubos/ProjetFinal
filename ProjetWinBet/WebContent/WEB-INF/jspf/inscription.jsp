@@ -82,6 +82,18 @@
 					<td><form:errors path="client.adresse.pays" cssClass="errors" /></td>
 				</tr>
 				<tr>
+					<td nowrap><form:label path="client.authentification.email">
+							<spring:message code="authentification.username" />
+						</form:label></td>
+					<td><form:input path="client.authentification.email" class="form-control" /></td>
+					<td><form:errors path="client.authentification.email" cssClass="errors" /></td>
+				</tr>
+				<tr>
+					<td nowrap><spring:message code="authentification.password" /></td>
+					<td><form:password path="client.authentification.motDePasse" class="form-control"/></td>
+					<td><form:errors path="client.authentification.motDePasse" cssClass="errors" /></td>
+				</tr>
+				<tr>
 					<td nowrap><form:label path="client.montantMax">
 							<spring:message code="client.montantMax" />
 						</form:label></td>
