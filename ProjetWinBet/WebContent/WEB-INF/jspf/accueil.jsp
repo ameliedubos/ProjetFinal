@@ -58,6 +58,9 @@
 </div>
 
 <div align="center">
+<c:if test="${param.logout}">
+	<span class="error"><spring:message code="authentification.logout" /></span>
+	</c:if>
 <table>
 <tr>
 <td><img src="<c:url value="/static/images/image1.jpeg" />" width="300" /></td>
