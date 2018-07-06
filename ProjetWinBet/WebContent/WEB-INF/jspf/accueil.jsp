@@ -4,8 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%-- <title><spring:message code="accueil.titre" /></title> --%>
-<title>Home</title>
+<title><spring:message code="accueil.home" /></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -18,16 +17,16 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand titre">!!!WINBET!!!</a>
+      <a class="navbar-brand titre"><spring:message code="accueil.titre" /></a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="<c:url value="/client/goToAccueil" />">Home</a></li>
-      <li class="active"><a href="" data-toggle="modal" data-target="#myModal">Règlement</a></li>
+      <li class="active"><a href="<c:url value="/client/goToAccueil" />"><spring:message code="accueil.home" /></a></li>
+      <li class="active"><a href="" data-toggle="modal" data-target="#myModal"><spring:message code="accueil.regle" /></a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="<c:url value="/client/goToCreer" />"><span class="glyphicon glyphicon-user"></span> S'inscrire</a></li>
-      <li><a href="<c:url value="/login" />"><span class="glyphicon glyphicon-log-in"></span> S'identifier</a></li>
-      <li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span> Se déconnecter</a></li>
+      <li><a href="<c:url value="/client/goToCreer" />"><span class="glyphicon glyphicon-user"></span> <spring:message code="accueil.inscrire" /></a></li>
+      <li><a href="<c:url value="/login" />"><span class="glyphicon glyphicon-log-in"></span> <spring:message code="accueil.identifier" /></a></li>
+      <li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="accueil.deconnecter" /></a></li>
     </ul>
   </div>
 </nav>
@@ -41,7 +40,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Règlement du site</h4>
+        <h4 class="modal-title"><spring:message code="accueil.reglesite" /></h4>
       </div>
       <div class="modal-body">
         <p>Bienvenue chez WINBET!<br><br>Voici quelques informations concernant notre site.<br><br>
