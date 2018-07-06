@@ -32,9 +32,9 @@ public class Client {
 	private String telephone;
 	@OneToMany
 	private List<Sport> listeSport;
-	// @NotEmpty(message = "{error.client.obligatoire}")
 	@Min(value=0 , message = "{error.client.obligatoire}")
 	private int montantMax;
+
 	
 	public Client() {
 	}

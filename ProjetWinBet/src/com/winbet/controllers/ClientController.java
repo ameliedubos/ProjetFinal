@@ -29,7 +29,7 @@ public class ClientController {
 
     @Autowired
     private IAuthentificationJpaRepository authentificationRepo;
-    
+
     @Autowired
     private ISportJpaRepository sportRepo;
 
@@ -61,7 +61,7 @@ public class ClientController {
 	    model.addAttribute("client", new Client());
 	    return "accueil";
 	} else {
-	    return "test";
+	    return "inscription";
 	}
     }
 
