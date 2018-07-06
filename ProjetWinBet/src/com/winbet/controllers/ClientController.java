@@ -42,6 +42,11 @@ public class ClientController {
 	return "accueil";
     }
 
+    @RequestMapping("/goToMenuClient")
+    private String gotoMenuClient(Model model) {
+	return "menuClient";
+    }
+
     @GetMapping("/goToCreer")
     public String goToCreer(Model model) {
 	model.addAttribute("client", new Client());

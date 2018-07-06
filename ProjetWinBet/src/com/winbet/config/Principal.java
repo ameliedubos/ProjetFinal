@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.winbet.entities.Admin;
 import com.winbet.entities.Authentification;
 import com.winbet.entities.Client;
 
@@ -15,16 +16,24 @@ public class Principal implements UserDetails {
 
     private Authentification authentification;
 
+    private Admin admin;
+
     private Client client;
 
-    public Principal(Authentification authentification) {
-	this.authentification = authentification;
+    public Principal(Admin admin) {
+	this.authentification = admin.getAuthentification();
+	this.admin = admin;
+    }
+
+    public Principal(Client client) {
+	this.authentification = client.getAuthentification();
+	this.client = client;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 	Collection<GrantedAuthority> authorities = new ArrayList<>();
-	authorities.add(new SimpleGrantedAuthority("CLIENT"));
+	authorities.add(new SimpleGrantedAuthority(authentification.getRole().name()));
 	return authorities;
     }
 
@@ -56,5 +65,21 @@ public class Principal implements UserDetails {
     @Override
     public boolean isEnabled() {
 	return true;
+    }
+
+    public boolean isAdministrateur() {
+	return null != admin;
+    }
+
+    public Client getClient() {
+	return client;
+    }
+
+    public Admin getAdmin() {
+	return admin;
+    }
+
+    public Authentification getAuthentification() {
+	return authentification;
     }
 }

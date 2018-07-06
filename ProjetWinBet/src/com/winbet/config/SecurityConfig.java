@@ -22,9 +22,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-	http.authorizeRequests().antMatchers("/static/**", "/client/goToAccueil", "/client/goToCreer", "/client/creer")
+	http.authorizeRequests()
+		.antMatchers("/static/**", "/welcome/goToAccueil", "/client/goToAccueil", "/client/goToCreer",
+			"/client/creer")
 		.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/securitycontroller/login")
-		.loginProcessingUrl("/login").defaultSuccessUrl("/client/goToAccueil", true)
+		.loginProcessingUrl("/login").defaultSuccessUrl("/welcome/goToAccueil", true)
 		.failureUrl("/securitycontroller/login?error=true").permitAll().and().logout()
 		.invalidateHttpSession(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		.logoutSuccessUrl("/client/goToAccueil?logout=true").permitAll();

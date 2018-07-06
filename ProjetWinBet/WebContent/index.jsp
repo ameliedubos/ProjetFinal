@@ -1,3 +1,2 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- <c:redirect url="/utilisateurcontroller/goToMenu" /> --%>
-toto page index
+<c:redirect url="/welcome/goToAccueil" />
