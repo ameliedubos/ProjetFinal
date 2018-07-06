@@ -2,11 +2,14 @@ package com.winbet.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Rencontre {
@@ -18,7 +21,9 @@ public class Rencontre {
 	private Equipe equipe1;
 	@OneToOne
 	private Equipe equipe2;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dateDebut;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dateFin;
 	private Boolean resultat;
 	private String cote1;

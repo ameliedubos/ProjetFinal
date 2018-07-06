@@ -91,7 +91,7 @@
 			<input type="submit" class="btn btn-success" value="Valider" align="center" />
 			<br>
 			<br>
-			<a href="menuAdmin">Retour</a>
+			<a href="goToMenuAdmin">Retour</a>
 		</div>
 	</form>
 </body>

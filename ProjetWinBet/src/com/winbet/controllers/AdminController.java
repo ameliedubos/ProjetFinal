@@ -6,10 +6,12 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,22 +58,23 @@ public class AdminController {
 	}
 
 	@PostMapping("/creer")
-	public String creer(@Valid @ModelAttribute(value = "rencontre") Rencontre rencontre, BindingResult result,
-			Model model) {
-
+	public String creer(@Valid @ModelAttribute(value = "rencontre") Rencontre rencontre, BindingResult result, Model model) {
+		
 		if (!result.hasErrors()) {
 			rencontreRepo.save(rencontre);
+			List<Rencontre> listeRencontres = rencontreRepo.findAll();
+			model.addAttribute("listeRencontres", listeRencontres);
 			return "menuAdmin";
 		} else {
-			return "creer";
+			return "creerRencontre";
 		}
 	}
 
-	@RequestMapping("/goToModifierRencontre")
-	public String goToModifierRencontre(@RequestParam(value = "id", required = true) Long id, Model model) {
+	@RequestMapping("/goToModifierRencontre/{id}")
+	public String goToModifierRencontre(@PathVariable(value = "id", required = true) Long id, Model model) {
 		Rencontre rencontre = rencontreRepo.getOne(id);
 		model.addAttribute("rencontre", rencontre);
-		return "creerRencontre";
+		return "modifierRencontre";
 	}
 
 	@PostMapping("/supprimerRencontre")
