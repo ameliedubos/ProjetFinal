@@ -37,7 +37,6 @@ public class ClientController {
     private String gotoAccueil(Model model) {
 	List<Sport> listeSports = sportRepo.findAll();
 	model.addAttribute("listeSports", listeSports);
-
 	return "accueil";
     }
 
