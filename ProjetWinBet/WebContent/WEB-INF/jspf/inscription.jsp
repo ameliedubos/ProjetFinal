@@ -105,7 +105,7 @@
 		<br>
 		<div align="center">
 			<input type="submit" class="btn btn-success" value="Valider"
-				align="center" /> <br> <br> <a href="/client/accueil">Retour</a>
+				align="center" /> <br> <br> <a href="goToAccueil">Retour</a>
 		</div>
 	</form>
 	</div>

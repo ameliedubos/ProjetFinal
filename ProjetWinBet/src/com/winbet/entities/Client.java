@@ -31,7 +31,7 @@ public class Client {
 	@OneToMany
 	private List<Sport> listeSport;
 	@NotEmpty(message = "{error.client.obligatoire}")
-	private int montantMax;
+	private String montantMax;
 	
 	public Client() {
 	}
@@ -100,11 +100,11 @@ public class Client {
 		this.listeSport = listeSport;
 	}
 
-	public int getMontantMax() {
+	public String getMontantMax() {
 		return montantMax;
 	}
 
-	public void setMontantMax(int montantMax) {
+	public void setMontantMax(String montantMax) {
 		this.montantMax = montantMax;
 	}
 

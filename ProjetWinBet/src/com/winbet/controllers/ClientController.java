@@ -57,6 +57,7 @@ public class ClientController {
 	}
 	if (!result.hasErrors()) {
 	    encodePassword(client.getAuthentification());
+	    authentificationRepo.save(client.getAuthentification());
 	    clientRepo.save(client);
 	    model.addAttribute("client", new Client());
 	    return "accueil";
