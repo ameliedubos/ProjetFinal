@@ -77,11 +77,10 @@
 <div align="center">
 <table>
 <tr>
-<td>Liste des sports:<br>
-
-	<c:forEach var = "i" begin = "1" end = "3">
-	    Sport <c:out value = "${i}"/><br>	
-      </c:forEach>
+<td>Liste des sports:<br>    
+      <c:forEach items="${listeSports}" var="sport">
+ 	  <c:out value="${sport.nom}" /><br>
+ 	  </c:forEach>
       </td>
 <td>
 <div class="une">A la une aujourd'hui!!!!<br></div>
