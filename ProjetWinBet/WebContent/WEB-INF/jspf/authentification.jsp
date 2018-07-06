@@ -12,6 +12,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="container">
 	<h2>
 		<spring:message code="authentification.title" />
 	</h2>
@@ -31,5 +32,6 @@
 		<br>
 		<input type="submit" value="<spring:message code="authentification.submit" />" />
 	</form>
+	</div>
 </body>
 </html>

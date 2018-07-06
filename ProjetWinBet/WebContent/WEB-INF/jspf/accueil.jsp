@@ -25,7 +25,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="<c:url value="/client/goToCreer" />"><span class="glyphicon glyphicon-user"></span> <spring:message code="accueil.inscrire" /></a></li>
-      <li><a href="<c:url value="/login" />"><span class="glyphicon glyphicon-log-in"></span> <spring:message code="accueil.identifier" /></a></li>
+      <li><a href="<c:url value="/securitycontroller/login" />"><span class="glyphicon glyphicon-log-in"></span> <spring:message code="accueil.identifier" /></a></li>
       <li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="accueil.deconnecter" /></a></li>
     </ul>
   </div>
