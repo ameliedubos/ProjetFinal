@@ -29,3 +29,9 @@ color: #800000;
 font-family:"Impact";
 }
 
+.background {
+ background-image: url("/ProjetWinBet/static/images/multisports_bandeau.jpg");
+ background-position: center;
+ background-repeat: no-repeat;
+ width: auto;
+}
