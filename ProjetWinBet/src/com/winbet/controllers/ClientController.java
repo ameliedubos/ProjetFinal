@@ -29,7 +29,8 @@ public class ClientController {
 
     @Autowired
     private IAuthentificationJpaRepository authentificationRepo;
-
+    
+    @Autowired
     private ISportJpaRepository sportRepo;
 
     @RequestMapping("/goToAccueil")
