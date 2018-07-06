@@ -17,7 +17,7 @@ import com.winbet.dao.IClientJpaRepository;
 import com.winbet.dao.ISportJpaRepository;
 import com.winbet.entities.Authentification;
 import com.winbet.entities.Client;
-
+import com.winbet.entities.ERole;
 import com.winbet.entities.Sport;
 
 @Controller
@@ -44,7 +44,6 @@ public class ClientController {
     @GetMapping("/goToCreer")
     public String goToCreer(Model model) {
 	model.addAttribute("client", new Client());
-	// model.addAttribute("roles", ERole.values());
 	return "inscription";
     }
 
@@ -57,13 +56,13 @@ public class ClientController {
 	}
 	if (!result.hasErrors()) {
 	    encodePassword(client.getAuthentification());
+	    client.getAuthentification().setRole(ERole.ROLE_CLIENT);
 	    clientRepo.save(client);
 	    model.addAttribute("client", new Client());
 	    return "accueil";
 	} else {
-	    return "creer";
+	    return "test";
 	}
-
     }
 
     private static void encodePassword(Authentification authentification) {
