@@ -2,6 +2,7 @@ package com.winbet.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -21,7 +23,7 @@ public class Client {
 	private String nom;
 	@NotEmpty(message = "{error.client.obligatoire}")
 	private String prenom;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Authentification authentification;
 	@NotEmpty(message = "{error.client.obligatoire}")
 	private String age;
@@ -30,8 +32,9 @@ public class Client {
 	private String telephone;
 	@OneToMany
 	private List<Sport> listeSport;
-	@NotEmpty(message = "{error.client.obligatoire}")
-	private String montantMax;
+	@Min(value=0 , message = "{error.client.obligatoire}")
+	private int montantMax;
+
 	
 	public Client() {
 	}
@@ -100,11 +103,11 @@ public class Client {
 		this.listeSport = listeSport;
 	}
 
-	public String getMontantMax() {
+	public int getMontantMax() {
 		return montantMax;
 	}
 
-	public void setMontantMax(String montantMax) {
+	public void setMontantMax(int montantMax) {
 		this.montantMax = montantMax;
 	}
 

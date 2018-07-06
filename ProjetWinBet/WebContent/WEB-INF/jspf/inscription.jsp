@@ -21,27 +21,26 @@
 	</div>
 	<br>
 	<form method="POST" action="creer" modelAttribute="client">
-<%-- 		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" /> --%>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<div align="center">
 			<TABLE BORDER=0>
 				<tr>
 					<td nowrap><form:label path="client.nom">
-							<spring:message code="client.nom" />
+							<spring:message code="client.nom" /><span class="required">*</span>
 						</form:label></td>
 					<td><form:input path="client.nom" class="form-control" /></td>
 					<td><form:errors path="client.nom" cssClass="errors" /></td>
 				</tr>
 				<tr>
 					<td nowrap><form:label path="client.prenom">
-							<spring:message code="client.prenom" />
+							<spring:message code="client.prenom" /><span class="required">*</span>
 						</form:label></td>
 					<td><form:input path="client.prenom" class="form-control" /></td>
 					<td><form:errors path="client.prenom" cssClass="errors" /></td>
 				</tr>
 				<tr>
 					<td nowrap><form:label path="client.age">
-							<spring:message code="client.age" />
+							<spring:message code="client.age" /><span class="required">*</span>
 						</form:label></td>
 					<td><form:input path="client.age" class="form-control" /></td>
 					<td><form:errors path="client.age" cssClass="errors" /></td>
@@ -83,19 +82,19 @@
 				</tr>
 				<tr>
 					<td nowrap><form:label path="client.authentification.email">
-							<spring:message code="authentification.username" />
+							<spring:message code="authentification.username" /><span class="required">*</span>
 						</form:label></td>
 					<td><form:input path="client.authentification.email" class="form-control" /></td>
 					<td><form:errors path="client.authentification.email" cssClass="errors" /></td>
 				</tr>
 				<tr>
-					<td nowrap><spring:message code="authentification.password" /></td>
+					<td nowrap><form:label path="client.authentification.motDePasse"><spring:message code="authentification.password" /><span class="required">*</span></form:label></td>
 					<td><form:password path="client.authentification.motDePasse" class="form-control"/></td>
 					<td><form:errors path="client.authentification.motDePasse" cssClass="errors" /></td>
 				</tr>
 				<tr>
 					<td nowrap><form:label path="client.montantMax">
-							<spring:message code="client.montantMax" />
+							<spring:message code="client.montantMax" /><span class="required">*</span>
 						</form:label></td>
 					<td><form:input path="client.montantMax" class="form-control" /></td>
 					<td><form:errors path="client.montantMax" cssClass="errors" /></td>
