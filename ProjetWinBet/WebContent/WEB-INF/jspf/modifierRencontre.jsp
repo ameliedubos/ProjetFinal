@@ -30,10 +30,11 @@
 		<form:label path="rencontre.equipe1.sport.id"><spring:message code="modifierRencontre.sport" /></form:label>
 		<c:out value="${sport}" />
 		</div>
-		</form>
+	</form>
 		
 	<form method="POST" action="${pageContext.request.contextPath}/admin/modifier" modelAttribute="rencontre">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<form:hidden path="rencontre.id"/>
 		<div align="center">
 			<TABLE BORDER=0><!-- Tableau 4 colonnes et 6 lignes -->
 				<tr>					
@@ -85,10 +86,14 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td><form:input type="datetime" path="rencontre.dateDebut" class="form-control" /></td>
-					<td><form:errors path="rencontre.dateDebut" cssClass="errors" /></td>
-					<td><form:input type="datetime" path="rencontre.dateFin" class="form-control" /></td>
-					<td><form:errors path="rencontre.dateFin" cssClass="errors" /></td>
+					<td><form:input type="date" path="rencontre.dateDebut" class="form-control" /></td>
+					<td></td>
+					<td><form:input type="date" path="rencontre.dateFin" class="form-control" /></td>
+					<td></td>
+				</tr>
+				<tr>
+				<td colspan="4"><form:errors path="rencontre.dateDebut" cssClass="errors" />
+				<form:errors path="rencontre.dateFin" cssClass="errors" /></td>
 				</tr>
 				<tr>					
 					<td nowrap><form:label path="rencontre.score">
@@ -104,13 +109,16 @@
 				</tr>
 				<tr>
 					<td><form:input path="rencontre.score" class="form-control" /></td>
-					<td><form:errors path="rencontre.score" cssClass="errors" /></td>
+					<td></td>
 					<td>
 					<form:select path="rencontre.vainqueur"  required="true">
 						<form:option value="${equipe1id}"  label="${equipe1}" />
 						<form:option value="${equipe2id}"  label="${equipe2}" />
 					</form:select></td>
 					<td><form:errors path="rencontre.vainqueur" cssClass="errors" /></td>
+				</tr>
+				<tr>
+				<td colspan="4"><form:errors path="rencontre.score" cssClass="errors" /></td>
 				</tr>
 			</TABLE>
 		</div>

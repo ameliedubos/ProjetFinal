@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,10 +27,11 @@ public class Rencontre {
 	private Date dateDebut;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateFin;
+	//@NotEmpty(message = "{error.admin.score}")
 	private String score;
 	private String cote1;
 	private String cote2;
-	private Long vainqueur;
+	private String vainqueur;
 
 	public Rencontre() {
 
@@ -99,11 +101,11 @@ public class Rencontre {
 		this.score = score;
 	}
 
-	public Long getVainqueur() {
+	public String getVainqueur() {
 		return vainqueur;
 	}
 
-	public void setVainqueur(Long vainqueur) {
+	public void setVainqueur(String vainqueur) {
 		this.vainqueur = vainqueur;
 	}
 
