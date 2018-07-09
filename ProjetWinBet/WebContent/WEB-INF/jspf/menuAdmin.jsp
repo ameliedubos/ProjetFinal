@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +19,9 @@
 
 <div class="container">
 <br><br>
-<h2>Bienvenue sur votre page administrateur "Nom admin"</h2>
+<h2>
+Bienvenue  <sec:authentication property="principal.admin.nom"/>
+</h2>
 <br><br>
 <table class="table table-striped">
     <tr>
@@ -43,8 +46,6 @@
 
 
 <a href="<c:url value="/admin/goToCreerRencontre" />">Créer une rencontre</a>
-<br><br><br>
-<a href="<c:url value="/admin/goToMenuAdmin" />">Retour au menu</a>
 <br>
 <a href="<c:url value="/admin/goToAccueil" />">Retour à l'accueil</a>
 

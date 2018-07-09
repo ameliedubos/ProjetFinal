@@ -33,10 +33,11 @@ public class WelcomeController {
 
 	if (!AuthHelper.isAuthenticated())
 	    return "accueil";
-	else if (AuthHelper.getRole().equals(ERole.ROLE_CLIENT))
-	    return "redirect:/client/goToMenuClient";
-	else
-	    return "redirect:/admin/goToMenuAdmin";
+	//else if (AuthHelper.getRole().equals(ERole.ROLE_CLIENT))
+	else if (AuthHelper.getPrincipal().isAdministrateur())
+		return "redirect:/admin/goToMenuAdmin";
+	else   
+		return "redirect:/client/goToMenuClient";
     }
 
 //    private static void encodePassword(Authentification authentification) {
