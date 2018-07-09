@@ -22,7 +22,7 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="<c:url value="/client/goToAccueil" />"><spring:message code="accueil.home" /></a></li>
       <li class="active"><a href="" data-toggle="modal" data-target="#myModal"><spring:message code="accueil.regle" /></a></li>
-      <li class="active"><a href="<c:url value="/admin/goToMenuAdmin" />"><spring:message code="accueil.menu" /></a></li>
+      <li class="active"><a href="<c:url value="/welcome/goToAccueil" />"><spring:message code="accueil.menu" /></a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="<c:url value="/client/goToCreer" />"><span class="glyphicon glyphicon-user"></span> <spring:message code="accueil.inscrire" /></a></li>

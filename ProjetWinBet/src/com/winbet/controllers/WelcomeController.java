@@ -21,14 +21,14 @@ public class WelcomeController {
     public String goToAccueil() {
 
 	// à commenter
-	Admin admin = new Admin();
-	Authentification auth = new Authentification();
-	auth.setEmail("root@root.fr");
-	auth.setMotDePasse("123");
-	auth.setRole(ERole.ROLE_ADMIN);
-	encodePassword(auth);
-	admin.setAuthentification(auth);
-	AdminRepo.save(admin);
+//	Admin admin = new Admin();
+//	Authentification auth = new Authentification();
+//	auth.setEmail("root@root.fr");
+//	auth.setMotDePasse("123");
+//	auth.setRole(ERole.ROLE_ADMIN);
+//	encodePassword(auth);
+//	admin.setAuthentification(auth);
+//	AdminRepo.save(admin);
 	//
 
 	if (!AuthHelper.isAuthenticated())
@@ -39,10 +39,10 @@ public class WelcomeController {
 	    return "redirect:/admin/goToMenuAdmin";
     }
 
-    private static void encodePassword(Authentification authentification) {
-	String rawPassword = authentification.getMotDePasse();
-	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-	String encodedPassword = encoder.encode(rawPassword);
-	authentification.setMotDePasse(encodedPassword);
-    }
+//    private static void encodePassword(Authentification authentification) {
+//	String rawPassword = authentification.getMotDePasse();
+//	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//	String encodedPassword = encoder.encode(rawPassword);
+//	authentification.setMotDePasse(encodedPassword);
+//    }
 }
