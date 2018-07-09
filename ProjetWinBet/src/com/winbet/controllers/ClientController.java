@@ -55,7 +55,6 @@ public class ClientController {
 
     @PostMapping("/creer")
     public String creer(@Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
-
 	if (authentificationRepo.findByEmail(client.getAuthentification().getEmail()) != null) {
 	    ObjectError erreurDoublon = new ObjectError("client.authentification.email", "cet email existe déjà");
 	    result.addError(erreurDoublon);
