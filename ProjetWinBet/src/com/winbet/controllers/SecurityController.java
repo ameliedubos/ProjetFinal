@@ -9,8 +9,7 @@ public class SecurityController {
 
     @SuppressWarnings("unused")
     @GetMapping("/login")
-    public String appLogin(@RequestParam(value = "error", required = false) Boolean error,
-	    @RequestParam(value = "logout", required = false) Boolean logout) {
+    public String appLogin(@RequestParam(value = "error", required = false) Boolean error) {
 	return "authentification";
     }
 }

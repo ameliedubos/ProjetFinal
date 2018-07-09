@@ -22,11 +22,11 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="<c:url value="/client/goToAccueil" />"><spring:message code="accueil.home" /></a></li>
       <li class="active"><a href="" data-toggle="modal" data-target="#myModal"><spring:message code="accueil.regle" /></a></li>
-      <li class="active"><a href="<c:url value="/admin/goToMenuAdmin" />"><spring:message code="accueil.menu" /></a></li>
+      <li class="active"><a href="<c:url value="/welcome/goToAccueil" />"><spring:message code="accueil.menu" /></a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="<c:url value="/client/goToCreer" />"><span class="glyphicon glyphicon-user"></span> <spring:message code="accueil.inscrire" /></a></li>
-      <li><a href="<c:url value="/login" />"><span class="glyphicon glyphicon-log-in"></span> <spring:message code="accueil.identifier" /></a></li>
+      <li><a href="<c:url value="/securitycontroller/login" />"><span class="glyphicon glyphicon-log-in"></span> <spring:message code="accueil.identifier" /></a></li>
       <li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="accueil.deconnecter" /></a></li>
     </ul>
   </div>
@@ -59,6 +59,9 @@
 </div>
 
 <div align="center">
+<c:if test="${param.logout}">
+	<span class="error"><spring:message code="authentification.logout" /></span>
+	</c:if>
 <table>
 <tr>
 <td><img src="<c:url value="/static/images/image1.jpeg" />" width="300" /></td>

@@ -6,4 +6,6 @@ import com.winbet.entities.Client;
 
 public interface IClientJpaRepository extends JpaRepository<Client, Long> {
 
+    public Client findByAuthentificationEmail(String email);
+
 }

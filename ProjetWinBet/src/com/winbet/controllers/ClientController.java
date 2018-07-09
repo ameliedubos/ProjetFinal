@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.winbet.dao.IAuthentificationJpaRepository;
 import com.winbet.dao.IClientJpaRepository;
 import com.winbet.dao.ISportJpaRepository;
@@ -34,10 +36,15 @@ public class ClientController {
     private ISportJpaRepository sportRepo;
 
     @RequestMapping("/goToAccueil")
-    private String gotoAccueil(Model model) {
+    private String gotoAccueil(@RequestParam(value = "logout", required = false) Boolean logout, Model model) {
 	List<Sport> listeSports = sportRepo.findAll();
 	model.addAttribute("listeSports", listeSports);
 	return "accueil";
+    }
+
+    @RequestMapping("/goToMenuClient")
+    private String gotoMenuClient(Model model) {
+	return "menuClient";
     }
 
     @GetMapping("/goToCreer")

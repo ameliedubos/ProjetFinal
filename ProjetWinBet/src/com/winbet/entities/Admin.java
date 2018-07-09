@@ -1,50 +1,64 @@
 package com.winbet.entities;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Admin {
 
-	private Long id;
-	private String nom;
-	private String prenom;
-	private Authentification authentification;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Admin() {
-	}
+    private String nom;
+    private String prenom;
 
-	public Long getId() {
-		return id;
-	}
+    @OneToOne(cascade = CascadeType.ALL)
+    private Authentification authentification;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Admin() {
+    }
 
-	public String getNom() {
-		return nom;
-	}
+    public Long getId() {
+	return id;
+    }
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+    public void setId(Long id) {
+	this.id = id;
+    }
 
-	public String getPrenom() {
-		return prenom;
-	}
+    public String getNom() {
+	return nom;
+    }
 
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
+    public void setNom(String nom) {
+	this.nom = nom;
+    }
 
-	public Authentification getAuthentification() {
-		return authentification;
-	}
+    public String getPrenom() {
+	return prenom;
+    }
 
-	public void setAuthentification(Authentification authentification) {
-		this.authentification = authentification;
-	}
+    public void setPrenom(String prenom) {
+	this.prenom = prenom;
+    }
 
-	public String toString() {
-		return "Admin [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", authentification=" + authentification
-				+ "]";
-	}
+    public Authentification getAuthentification() {
+	return authentification;
+    }
+
+    public void setAuthentification(Authentification authentification) {
+	this.authentification = authentification;
+    }
+
+    @Override
+    public String toString() {
+	return "Admin [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", authentification=" + authentification
+		+ "]";
+    }
 
 }

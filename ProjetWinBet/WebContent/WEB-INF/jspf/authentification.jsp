@@ -12,14 +12,13 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="container">
 	<h2>
 		<spring:message code="authentification.title" />
 	</h2>
+	
 	<c:if test="${param.error}">
 		<span class="error"><spring:message code="authentification.inconnu" /></span>
-	</c:if>
-	<c:if test="${param.logout}">
-		<span class="error"><spring:message code="authentification.logout" /></span>
 	</c:if>
 	<form method="POST" action="<c:url value="/login" />">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -31,5 +30,6 @@
 		<br>
 		<input type="submit" value="<spring:message code="authentification.submit" />" />
 	</form>
+	</div>
 </body>
 </html>
