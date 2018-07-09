@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
@@ -23,6 +24,7 @@ public class Client {
 	private String nom;
 	@NotEmpty(message = "{error.client.obligatoire}")
 	private String prenom;
+	@Valid
 	@OneToOne(cascade=CascadeType.ALL)
 	private Authentification authentification;
 	@NotEmpty(message = "{error.client.obligatoire}")

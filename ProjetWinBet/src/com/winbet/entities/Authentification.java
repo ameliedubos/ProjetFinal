@@ -1,6 +1,8 @@
 package com.winbet.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,7 @@ public class Authentification {
 	private String email;
 	@NotEmpty(message = "{error.authentification.obligatoire}")
 	private String motDePasse;
+    @Enumerated(EnumType.STRING)
 	private ERole role;
 	
 	public Authentification() {
