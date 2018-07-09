@@ -85,9 +85,9 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td><form:input type="date" path="rencontre.dateDebut" class="form-control" /></td>
+					<td><form:input type="datetime" path="rencontre.dateDebut" class="form-control" /></td>
 					<td><form:errors path="rencontre.dateDebut" cssClass="errors" /></td>
-					<td><form:input type="date" path="rencontre.dateFin" class="form-control" /></td>
+					<td><form:input type="datetime" path="rencontre.dateFin" class="form-control" /></td>
 					<td><form:errors path="rencontre.dateFin" cssClass="errors" /></td>
 				</tr>
 				<tr>					

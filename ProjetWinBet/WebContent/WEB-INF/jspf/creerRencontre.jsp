@@ -89,9 +89,9 @@
 				</tr>
 				<tr>
 					<td><form:input type="date" path="rencontre.dateDebut" class="form-control" /></td>
-					<td><form:errors path="rencontre.dateDebut" cssClass="errors" /></td>
+					<td><form:errors path="erreurDateDebut" cssClass="errors" /></td>
 					<td><form:input type="date" path="rencontre.dateFin" class="form-control" /></td>
-					<td><form:errors path="rencontre.dateFin" cssClass="errors" /></td>
+					<td><form:errors path="erreurDateFin" cssClass="errors" /></td>
 				</tr>
 			</TABLE>
 		</div>

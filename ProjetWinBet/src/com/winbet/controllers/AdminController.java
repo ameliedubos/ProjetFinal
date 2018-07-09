@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,13 +66,17 @@ public class AdminController {
 	
 	@PostMapping("/creer")
 	public String creer(@Valid @ModelAttribute(value = "rencontre") Rencontre rencontre, BindingResult result, Model model) {
-		
+		if (rencontre.getDateFin().before(rencontre.getDateDebut())) {
+		    ObjectError erreurDateFin = new ObjectError("erreurDateFin", "La date de fin est inférieur à la date de début");
+		    result.addError(erreurDateFin);
+		}
 		if (!result.hasErrors()) {
 			rencontreRepo.save(rencontre);
 			List<Rencontre> listeRencontres = rencontreRepo.findAll();
 			model.addAttribute("listeRencontres", listeRencontres);
 			return "menuAdmin";
 		} else {
+			listeSports(model);
 			return "creerRencontre";
 		}
 	}

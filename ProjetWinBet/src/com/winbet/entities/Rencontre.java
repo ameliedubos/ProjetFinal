@@ -1,5 +1,6 @@
 package com.winbet.entities;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
