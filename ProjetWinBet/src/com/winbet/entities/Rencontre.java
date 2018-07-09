@@ -21,13 +21,14 @@ public class Rencontre {
 	private Equipe equipe1;
 	@OneToOne
 	private Equipe equipe2;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateDebut;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateFin;
-	private Boolean resultat;
+	private String score;
 	private String cote1;
 	private String cote2;
+	private Long vainqueur;
 
 	public Rencontre() {
 
@@ -73,14 +74,6 @@ public class Rencontre {
 		this.dateFin = dateFin;
 	}
 
-	public Boolean getResultat() {
-		return resultat;
-	}
-
-	public void setResultat(Boolean resultat) {
-		this.resultat = resultat;
-	}
-
 	public String getCote1() {
 		return cote1;
 	}
@@ -97,9 +90,26 @@ public class Rencontre {
 		this.cote2 = cote2;
 	}
 
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+
+	public Long getVainqueur() {
+		return vainqueur;
+	}
+
+	public void setVainqueur(Long vainqueur) {
+		this.vainqueur = vainqueur;
+	}
+
 	public String toString() {
 		return "Rencontre [id=" + id + ", equipe1=" + equipe1 + ", equipe2=" + equipe2 + ", dateDebut=" + dateDebut
-				+ ", dateFin=" + dateFin + ", resultat=" + resultat + ", cote1=" + cote1 + ", cote2=" + cote2 + "]";
+				+ ", dateFin=" + dateFin + ", score=" + score + ", cote1=" + cote1 + ", cote2=" + cote2 + ", vainqueur="
+				+ vainqueur + "]";
 	}
 
 }

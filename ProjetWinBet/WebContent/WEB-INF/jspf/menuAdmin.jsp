@@ -39,6 +39,7 @@ Bienvenue  <sec:authentication property="principal.admin.nom"/>
 	    <c:out value = "${rencontre.cote2}"/>
 	    </td>
 	    <td><a href="<c:url value="/admin/goToModifierRencontre/${rencontre.id}" />">Modifier la rencontre</a></td>
+	    <td><a href="<c:url value="/admin/supprimerRencontre/${rencontre.id}" />">Supprimer la rencontre</a></td>
 	    </tr>
       </c:forEach>
      
@@ -46,7 +47,10 @@ Bienvenue  <sec:authentication property="principal.admin.nom"/>
 
 
 <a href="<c:url value="/admin/goToCreerRencontre" />">Créer une rencontre</a>
+
+
 <br>
+
 <a href="<c:url value="/admin/goToAccueil" />">Retour à l'accueil</a>
 
 </div>
