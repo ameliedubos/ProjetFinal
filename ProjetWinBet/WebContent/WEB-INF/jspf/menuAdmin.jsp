@@ -35,7 +35,7 @@
 	    <td><c:out value = "${rencontre.equipe2.nom}"/><br>
 	    <c:out value = "${rencontre.cote2}"/>
 	    </td>
-	    <td><a href="<c:url value="/admin/goToCreerRencontre" />">Modifier la rencontre</a></td>
+	    <td><a href="<c:url value="/admin/goToModifierRencontre/${rencontre.id}" />">Modifier la rencontre</a></td>
 	    </tr>
       </c:forEach>
      
