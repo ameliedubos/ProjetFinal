@@ -23,30 +23,39 @@
 		</h1>
 	</div>
 	<br>
+		<form method="POST" action="goToValidSport" modelAttribute="rencontre">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+		<div align="center">
+		<form:label path="rencontre.equipe1.sport.id"><spring:message code="creerRencontre.choixSport" /></form:label>
+		<form:select path="rencontre.equipe1.sport.id">
+			<form:option value="" label="" />
+			<form:options items="${listeSports}" itemValue="id" itemLabel="nom" />
+		</form:select>
+		<input type="submit" class="btn btn-success" value="Valider" align="center" />
+		</div>
+		</form>
+			
 	<form method="POST" action="creer" modelAttribute="rencontre">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<div align="center">
-		<spring:message code="creerRencontre.choixSport" />
-		</div>
-		<div align="center">
 			<TABLE BORDER=0><!-- Tableau 4 colonnes et 6 lignes -->
 				<tr>					
-					<td nowrap><form:label path="rencontre.equipe1.nom">
-							<spring:message code="creerRencontre.equipe1" />
-							<span class="required">*</span>
-						</form:label></td>
+					<td nowrap>
+					<form:label path="rencontre.equipe1.id"><spring:message code="creerRencontre.equipe1" /></form:label>
+					<form:select path="rencontre.equipe1.id"  required="true">
+						<form:option value="" label="" />
+						<form:options items="${listeEquipes}" itemValue="id" itemLabel="nom" />
+					</form:select>
+					</td>
 					<td></td>
-					<td nowrap><form:label path="rencontre.equipe2.nom">
-							<spring:message code="creerRencontre.equipe2" />
-							<span class="required">*</span>
-						</form:label></td>
+					<td nowrap>
+					<form:label path="rencontre.equipe2.id"><spring:message code="creerRencontre.equipe2" /></form:label>
+					<form:select path="rencontre.equipe2.id" required="true" >
+						<form:option value="" label="" />
+						<form:options items="${listeEquipes}" itemValue="id" itemLabel="nom" />
+					</form:select></td>
 					<td></td>
-				</tr>
-				<tr>
-					<td><form:input path="rencontre.equipe1.nom" class="form-control" /></td>
-					<td><form:errors path="rencontre.equipe1.nom" cssClass="errors" /></td>
-					<td><form:input path="rencontre.equipe2.nom" class="form-control" /></td>
-					<td><form:errors path="rencontre.equipe2.nom" cssClass="errors" /></td>
 				</tr>
 				<tr>					
 					<td nowrap><form:label path="rencontre.cote1">
@@ -79,9 +88,9 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td><form:input path="rencontre.dateDebut" class="form-control" /></td>
+					<td><form:input type="date" path="rencontre.dateDebut" class="form-control" /></td>
 					<td><form:errors path="rencontre.dateDebut" cssClass="errors" /></td>
-					<td><form:input path="rencontre.dateFin" class="form-control" /></td>
+					<td><form:input type="date" path="rencontre.dateFin" class="form-control" /></td>
 					<td><form:errors path="rencontre.dateFin" cssClass="errors" /></td>
 				</tr>
 			</TABLE>

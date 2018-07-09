@@ -52,11 +52,17 @@ public class AdminController {
 	@GetMapping("/goToCreerRencontre")
 	public String goToCreerRencontre(Model model) {
 		listeSports(model);
-		listeEquipes(model);
 		model.addAttribute("rencontre", new Rencontre());
 		return "creerRencontre";
 	}
-
+	
+	@RequestMapping("/goToValidSport")
+	public String valideSport(@ModelAttribute(value = "rencontre") Rencontre rencontre,  Model model) {		
+		model.addAttribute("listeEquipes", equipeRepo.findbySport(rencontre.getEquipe1().getSport().getId()));
+		listeSports(model);
+		return "creerRencontre";
+	}
+	
 	@PostMapping("/creer")
 	public String creer(@Valid @ModelAttribute(value = "rencontre") Rencontre rencontre, BindingResult result, Model model) {
 		
@@ -74,12 +80,34 @@ public class AdminController {
 	public String goToModifierRencontre(@PathVariable(value = "id", required = true) Long id, Model model) {
 		Rencontre rencontre = rencontreRepo.getOne(id);
 		model.addAttribute("rencontre", rencontre);
+		model.addAttribute("sport", rencontre.getEquipe1().getSport().getNom());
+		model.addAttribute("equipe1", rencontre.getEquipe1().getNom());
+		model.addAttribute("equipe2", rencontre.getEquipe2().getNom());
+		model.addAttribute("equipe1id", rencontre.getEquipe1().getId());
+		model.addAttribute("equipe2id", rencontre.getEquipe2().getId());
+		listeSports(model);
+		listeEquipes(model);
 		return "modifierRencontre";
 	}
+	
+	@PostMapping("/modifier")
+	public String modifier(@Valid @ModelAttribute(value = "rencontre") Rencontre rencontre, BindingResult result, Model model) {
+		
+		if (!result.hasErrors()) {
+			rencontreRepo.save(rencontre);
+			List<Rencontre> listeRencontres = rencontreRepo.findAll();
+			model.addAttribute("listeRencontres", listeRencontres);
+			return "menuAdmin";
+		} else {
+			return "modifierRencontre";
+		}
+	}
 
-	@PostMapping("/supprimerRencontre")
-	public String supprimerRencontre(@RequestParam(value = "id", required = true) Long id, Model model) {
+	@RequestMapping("/supprimerRencontre/{id}")
+	public String supprimerRencontre(@PathVariable(value = "id", required = true) Long id, Model model) {
 		rencontreRepo.deleteById(id);
+		List<Rencontre> listeRencontres = rencontreRepo.findAll();
+		model.addAttribute("listeRencontres", listeRencontres);
 		return "menuAdmin";
 	}
 
