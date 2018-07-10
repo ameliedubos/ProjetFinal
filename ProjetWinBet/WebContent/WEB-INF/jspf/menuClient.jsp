@@ -22,7 +22,7 @@ Bienvenue <sec:authentication property="principal.client.nom"/>
 <br>
 <a href="<c:url value="/client/goToCompte" />">Consulter son compte</a>
 <br>
-<a href="<c:url value="/client/goToListeRencontrePariees" />">Afficher la liste de mes rencontres pariées</a>
+<a href="<c:url value="/client/goToRencontresPariees" />">Afficher la liste de mes rencontres pariées</a>
 <br>
 <a href="<c:url value="/client/goToRencontresAvenir" />">afficher la liste des rencontres à venir</a>
 <br>
