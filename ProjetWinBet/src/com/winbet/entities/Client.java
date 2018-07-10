@@ -16,107 +16,107 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Client {
-	
-	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Long id;
-	@NotEmpty(message = "{error.client.obligatoire}")
-	private String nom;
-	@NotEmpty(message = "{error.client.obligatoire}")
-	private String prenom;
-	@Valid
-	@OneToOne(cascade=CascadeType.ALL)
-	private Authentification authentification;
-	@NotEmpty(message = "{error.client.obligatoire}")
-	private String age;
-	@Embedded
-	private Adresse adresse;
-	private String telephone;
-	@OneToMany
-	private List<Sport> listeSport;
-	@Min(value=0 , message = "{error.client.obligatoire}")
-	private int montantMax;
 
-	
-	public Client() {
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotEmpty(message = "{error.client.obligatoire}")
+    private String nom;
+    @NotEmpty(message = "{error.client.obligatoire}")
+    private String prenom;
+    @Valid
+    @OneToOne(cascade = CascadeType.ALL)
+    private Authentification authentification;
+    @NotEmpty(message = "{error.client.obligatoire}")
+    private String age;
+    @Embedded
+    private Adresse adresse;
+    private String telephone;
+    @OneToMany
+    private List<Sport> listeSport;
+    @Min(value = 1, message = "{error.client.montantMax}")
+    private int montantMax;
 
-	public Long getId() {
-		return id;
-	}
+    public Client() {
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+	return id;
+    }
 
-	public String getNom() {
-		return nom;
-	}
+    public void setId(Long id) {
+	this.id = id;
+    }
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+    public String getNom() {
+	return nom;
+    }
 
-	public String getPrenom() {
-		return prenom;
-	}
+    public void setNom(String nom) {
+	this.nom = nom;
+    }
 
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
+    public String getPrenom() {
+	return prenom;
+    }
 
-	public Authentification getAuthentification() {
-		return authentification;
-	}
+    public void setPrenom(String prenom) {
+	this.prenom = prenom;
+    }
 
-	public void setAuthentification(Authentification authentification) {
-		this.authentification = authentification;
-	}
+    public Authentification getAuthentification() {
+	return authentification;
+    }
 
-	public String getAge() {
-		return age;
-	}
+    public void setAuthentification(Authentification authentification) {
+	this.authentification = authentification;
+    }
 
-	public void setAge(String age) {
-		this.age = age;
-	}
+    public String getAge() {
+	return age;
+    }
 
-	public Adresse getAdresse() {
-		return adresse;
-	}
+    public void setAge(String age) {
+	this.age = age;
+    }
 
-	public void setAdresse(Adresse adresse) {
-		this.adresse = adresse;
-	}
+    public Adresse getAdresse() {
+	return adresse;
+    }
 
-	public String getTelephone() {
-		return telephone;
-	}
+    public void setAdresse(Adresse adresse) {
+	this.adresse = adresse;
+    }
 
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
+    public String getTelephone() {
+	return telephone;
+    }
 
-	public List<Sport> getListeSport() {
-		return listeSport;
-	}
+    public void setTelephone(String telephone) {
+	this.telephone = telephone;
+    }
 
-	public void setListeSport(List<Sport> listeSport) {
-		this.listeSport = listeSport;
-	}
+    public List<Sport> getListeSport() {
+	return listeSport;
+    }
 
-	public int getMontantMax() {
-		return montantMax;
-	}
+    public void setListeSport(List<Sport> listeSport) {
+	this.listeSport = listeSport;
+    }
 
-	public void setMontantMax(int montantMax) {
-		this.montantMax = montantMax;
-	}
+    public int getMontantMax() {
+	return montantMax;
+    }
 
-	public String toString() {
-		return "Client [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", authentification=" + authentification
-				+ ", age=" + age + ", adresse=" + adresse + ", telephone=" + telephone + ", listeSport=" + listeSport
-				+ ", montantMax=" + montantMax + "]";
-	}    
+    public void setMontantMax(int montantMax) {
+	this.montantMax = montantMax;
+    }
+
+    @Override
+    public String toString() {
+	return "Client [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", authentification=" + authentification
+		+ ", age=" + age + ", adresse=" + adresse + ", telephone=" + telephone + ", listeSport=" + listeSport
+		+ ", montantMax=" + montantMax + "]";
+    }
 
 }

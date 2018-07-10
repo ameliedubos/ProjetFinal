@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	http.authorizeRequests()
 		.antMatchers("/static/**", "/welcome/goToAccueil", "/client/goToAccueil", "/client/goToCreer",
-			"/client/creer")
+			"/client/creer", "/index.jsp")
 		.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/securitycontroller/login")
 		.loginProcessingUrl("/login").defaultSuccessUrl("/welcome/goToAccueil", true)
 		.failureUrl("/securitycontroller/login?error=true").permitAll().and().logout()

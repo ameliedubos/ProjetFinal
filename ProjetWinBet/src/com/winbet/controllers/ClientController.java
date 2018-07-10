@@ -45,25 +45,25 @@ public class ClientController {
 
 	@Autowired
 	private IPariJpaRepository pariRepo;
+ 
+    @RequestMapping("/goToAccueil")
+    private String gotoAccueil(@RequestParam(value = "logout", required = false) Boolean logout, Model model) {
+	List<Sport> listeSports = sportRepo.findAll();
+	model.addAttribute("listeSports", listeSports);
+	return "accueil";
+    }
 
-	@RequestMapping("/goToAccueil")
-	private String gotoAccueil(@RequestParam(value = "logout", required = false) Boolean logout, Model model) {
-		List<Sport> listeSports = sportRepo.findAll();
-		model.addAttribute("listeSports", listeSports);
-		return "accueil";
-	}
+    @RequestMapping("/goToMenuClient")
+    private String gotoMenuClient(Model model) {
+	return "menuClient";
+    }
 
-	@RequestMapping("/goToMenuClient")
-	private String gotoMenuClient(Model model) {
-		return "menuClient";
-	}
-
-	@GetMapping("/goToCreer")
-	public String goToCreer(Model model) {
-		model.addAttribute("client", new Client());
-		return "inscription";
-	}
-
+    @GetMapping("/goToCreer")
+    public String goToCreer(Model model) {
+	model.addAttribute("client", new Client());
+	return "inscription";
+    }
+   
 	@GetMapping("/goToConsulterCompte")
 	public String goToConsulterCompte(Model model) {
 		Client client=AuthHelper.getClient();
@@ -75,35 +75,32 @@ public class ClientController {
 	public String creer(@Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
 
 		if (!result.hasErrors()) {
-			String email = client.getAuthentification().getEmail();
-			Client other = null;
-			Long clientId = client.getId();
-			if(clientId == null) { // cea
-				other = clientRepo.findByAuthentificationEmail(email);
+		    String email = client.getAuthentification().getEmail();
+		    Authentification other = null;
+		    Long  AuthentificationId =  client.getAuthentification().getId();
+		    
+		    if(AuthentificationId == null) { // creation d'un compte
+				other = authentificationRepo.findByEmail(email);
 			}
-			else { // modif
-				other = clientRepo.findClientByIdNotAndAuthentificationEmail(email, clientId);
+			else { // modification d'un compte
+				other = authentificationRepo.findAuthentificationByIdNotAndAuthentificationEmail(email, AuthentificationId);
 			}
-			
-			
-			
-			
-			if (other != null) {
-				result.rejectValue("authentification.email", "error.authentification.email.doublon");
-			}
+		    		    
+		    if (other != null) {
+			result.rejectValue("authentification.email", "error.authentification.email.doublon");
+		    }
 		}
 		if (!result.hasErrors()) {
-
-			encodePassword(client.getAuthentification());
-			client.getAuthentification().setRole(ERole.ROLE_CLIENT);
-			clientRepo.save(client);
-			model.addAttribute("client", new Client());
-			return "accueil";
+		    encodePassword(client.getAuthentification());
+		    client.getAuthentification().setRole(ERole.ROLE_CLIENT);
+		    clientRepo.save(client);
+		    model.addAttribute("client", new Client());
+		    return "accueil";
 		} else {
-			return "inscription";
+		    return "inscription";
 		}
 	}
-
+		
 	@RequestMapping("/goToRencontresAvenir")
 	private String goToRencontresAvenir(Model model) {
 		Date now = new Date();
@@ -120,7 +117,7 @@ public class ClientController {
 		model.addAttribute("pari", pari);
 		return "pari";
 	}
-
+	
 	@PostMapping("/pari")
 	private String Pari(@Valid @ModelAttribute(value = "pari") Pari pari, BindingResult result, Model model) {
 		if (pari.getSomme() > pari.getClient().getMontantMax()) {
@@ -138,7 +135,7 @@ public class ClientController {
 			return "pari";
 		}
 	}
-
+	
 	@RequestMapping("/goToRencontresPariees")
 	private String goToRencontresPariees(@ModelAttribute(value = "client") Client client, Model model) {
 		List<Pari> listePariByClient = pariRepo.findByClientId(AuthHelper.getClient().getId());
