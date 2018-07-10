@@ -120,6 +120,14 @@ public class ClientController {
 	    return "pari";
 	}
     }
+    
+    
+    @RequestMapping("/goToRencontresPariees")
+    private String goToRencontresPariees(@ModelAttribute(value = "client") Client client, Model model) {
+	List<Pari> listePariByClient = pariRepo.findByClientId(AuthHelper.getClient().getId());
+	model.addAttribute("listePariByClient", listePariByClient);
+	return "rencontresPariees";
+    }
 
     private static void encodePassword(Authentification authentification) {
 	String rawPassword = authentification.getMotDePasse();

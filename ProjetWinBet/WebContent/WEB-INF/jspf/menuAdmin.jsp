@@ -49,8 +49,9 @@ Bienvenue  <sec:authentication property="principal.admin.nom"/>
 	    </td>
 	    <td><c:out value = "${rencontre.equipe2.nom}"/><br>
 	    <c:out value = "${rencontre.cote2}"/>
-	    <td><c:out value = "${rencontre.dateDebut}"/><br>
-	    <c:out value = "${rencontre.dateFin}"/>
+	    <td>
+	    <fmt:formatDate type = "date" value = "${rencontre.dateDebut}" /><br>
+	    <fmt:formatDate type = "date" value = "${rencontre.dateFin}" />
 	    </td>
 	    <td>
 	    <c:if test="${rencontre.dateDebut > now}"><spring:message code="menuAdmin.nondebute"/></c:if>
