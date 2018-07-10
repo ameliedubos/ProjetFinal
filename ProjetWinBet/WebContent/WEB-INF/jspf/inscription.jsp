@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Création de compte</title>
+<title>Mon compte</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -22,6 +22,8 @@
 	<br>
 	<form method="POST" action="creer" modelAttribute="client">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<form:hidden path="client.id" />
+	<form:hidden path="client.authentification.id" />
 		<div align="center">
 			<TABLE BORDER=0>
 				<tr>

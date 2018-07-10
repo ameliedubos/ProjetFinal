@@ -26,7 +26,6 @@ public class Rencontre {
 	private Date dateDebut;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateFin;
-	//@NotEmpty(message = "{error.admin.score}")
 	private String score;
 	private String cote1;
 	private String cote2;

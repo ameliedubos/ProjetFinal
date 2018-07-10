@@ -20,7 +20,7 @@
 Bienvenue <sec:authentication property="principal.client.nom"/>
 </h2>
 <br>
-<a href="<c:url value="/client/goToCompte" />">Consulter son compte</a>
+<a href="<c:url value="/client/goToConsulterCompte" />">Consulter/Modifier son compte</a>
 <br>
 <a href="<c:url value="/client/goToRencontresPariees" />">Afficher la liste de mes rencontres pariées</a>
 <br>
