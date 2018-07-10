@@ -21,7 +21,7 @@
 <br><br>
 <table class="table table-striped">
     <tr>
-    <td colspan="4"><h3>Liste des rencontres</h3></td>
+    <td colspan="4"><h3>Liste des rencontres à venir</h3></td>
     </tr>
 	<c:forEach items="${listeRencontres}" var="rencontre">
 	    <tr>
@@ -34,20 +34,17 @@
 	    <td><c:out value = "${rencontre.equipe2.nom}"/><br>
 	    <c:out value = "${rencontre.cote2}"/>
 	    </td>
-	    <td><a href="<c:url value="/admin/goToParier/${rencontre.id}" />">Parier</a></td>
+	    <td><a href="<c:url value="/client/goToPari/${rencontre.id}" />">Parier</a></td>
 	    </tr>
       </c:forEach>
      
  </table>    
 
 
-<a href="<c:url value="/admin/goToCreerRencontre" />">Créer une rencontre</a>
-
-
 <br>
 
-<a href="<c:url value="/admin/goToAccueil" />">Retour à l'accueil</a>
+<a href="<c:url value="/client/goToAccueil" />">Retour à l'accueil</a>
 
 </div>
 </body>
-</html>ml>
+</html>

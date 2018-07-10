@@ -24,7 +24,7 @@ Bienvenue <sec:authentication property="principal.client.nom"/>
 <br>
 <a href="<c:url value="/client/goToListeRencontrePariees" />">Afficher la liste de mes rencontres pariées</a>
 <br>
-<a href="<c:url value="/client//goToRencontresAvenir" />">afficher la liste des rencontres à venir</a>
+<a href="<c:url value="/client/goToRencontresAvenir" />">afficher la liste des rencontres à venir</a>
 <br>
 <br>
 <br>
