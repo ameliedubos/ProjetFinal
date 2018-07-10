@@ -31,7 +31,7 @@
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<div align="center">
 			<spring:message code="modifierRencontre.sport" />
-			<c:out value="${pari.rencontre.equipe1.sport}" />
+			<c:out value="${pari.rencontre.equipe1.sport.nom}" />
 		</div>
 		<div align="center">
 			<TABLE BORDER=0>
@@ -50,8 +50,8 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td><c:out value="${pari.rencontre.equipe1}" /><form:input type="hidden" path="pari.rencontre.equipe1" class="form-control" /></td><td></td>
-					<td><c:out value="${pari.rencontre.equipe2}" /><form:input type="hidden" path="pari.rencontre.equipe2" class="form-control" /></td>
+					<td><c:out value="${pari.rencontre.equipe1.nom}" /><form:input type="hidden" path="pari.rencontre.equipe1" class="form-control" /></td><td></td>
+					<td><c:out value="${pari.rencontre.equipe2.nom}" /><form:input type="hidden" path="pari.rencontre.equipe2" class="form-control" /></td>
 				</tr>
 <!-- 				<tr> -->
 <%--  					<td><c:out value="${equipe1}" /><form:input type="hidden" path="pari.rencontre.equipe1.id" class="form-control" /></td>						 --%>

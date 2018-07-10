@@ -122,7 +122,7 @@ public class ClientController {
 	    return "rencontresAVenir";
 	} else {
 	    // Pari originel=new Pari();
-
+	    System.out.println(pari.getRencontre().getEquipe1());
 	    return "pari";
 	}
     }
