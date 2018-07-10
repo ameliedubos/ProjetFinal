@@ -6,7 +6,6 @@ import com.winbet.entities.Authentification;
 
 public interface IAuthentificationJpaRepository extends JpaRepository<Authentification, Long> {
 
-    // Requete derivee = findBy + attribut de l'entite
     public Authentification findByEmail(String email);
 
 }
