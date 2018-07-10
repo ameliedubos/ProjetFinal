@@ -34,7 +34,7 @@
 <h2>
 Bienvenue <sec:authentication property="principal.client.prenom"/>&nbsp;<sec:authentication property="principal.client.nom"/>
 </h2>
-<<<<<<< HEAD
+
 <br><br>
 <div align="center">
 <img src="<c:url value="/static/images/multisports_bandeau.jpg" />" width="1000" />
