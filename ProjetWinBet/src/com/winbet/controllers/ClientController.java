@@ -105,9 +105,9 @@ public class ClientController {
 
     @PostMapping("/pari")
     private String Pari(@Valid @ModelAttribute(value = "pari") Pari pari, BindingResult result, Model model) {
-	// if (pari.getSomme() > pari.getClient().getMontantMax()) {
-	// result.rejectValue("pari.somme", "error.pari.somme.excessive");
-	// }
+	if (pari.getSomme() > pari.getClient().getMontantMax()) {
+	    result.rejectValue("somme", "error.pari.somme.excessive");
+	}
 	if (!result.hasErrors()) {
 	    pariRepo.save(pari);
 	    model.addAttribute("pari", new Pari());
