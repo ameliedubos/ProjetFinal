@@ -28,32 +28,31 @@ public class WelcomeController {
     public String goToAccueil(Model model) {
 
 	// à commenter
-//	Admin admin = new Admin();
-//	Authentification auth = new Authentification();
-//	auth.setEmail("root@root.fr");
-//	auth.setMotDePasse("123");
-//	auth.setRole(ERole.ROLE_ADMIN);
-//	encodePassword(auth);
-//	admin.setAuthentification(auth);
-//	AdminRepo.save(admin);
-	
+	Admin admin = new Admin();
+	Authentification auth = new Authentification();
+	auth.setEmail("root@root.fr");
+	auth.setMotDePasse("123");
+	auth.setRole(ERole.ROLE_ADMIN);
+	encodePassword(auth);
+	admin.setAuthentification(auth);
+	AdminRepo.save(admin);
 
 	if (!AuthHelper.isAuthenticated()) {
-		List<Sport> listeSports = sportRepo.findAll();
-		model.addAttribute("listeSports", listeSports);
+	    List<Sport> listeSports = sportRepo.findAll();
+	    model.addAttribute("listeSports", listeSports);
 	    return "accueil";
 	}
-	//else if (AuthHelper.getRole().equals(ERole.ROLE_CLIENT))
+	// else if (AuthHelper.getRole().equals(ERole.ROLE_CLIENT))
 	else if (AuthHelper.getPrincipal().isAdministrateur())
-		return "redirect:/admin/goToMenuAdmin";
-	else   
-		return "redirect:/client/goToMenuClient";
+	    return "redirect:/admin/goToMenuAdmin";
+	else
+	    return "redirect:/client/goToMenuClient";
     }
 
-//    private static void encodePassword(Authentification authentification) {
-//	String rawPassword = authentification.getMotDePasse();
-//	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//	String encodedPassword = encoder.encode(rawPassword);
-//	authentification.setMotDePasse(encodedPassword);
-//    }
+    private static void encodePassword(Authentification authentification) {
+	String rawPassword = authentification.getMotDePasse();
+	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	String encodedPassword = encoder.encode(rawPassword);
+	authentification.setMotDePasse(encodedPassword);
+    }
 }
