@@ -46,6 +46,8 @@ public class ClientController {
     @Autowired
     private IPariJpaRepository pariRepo;
 
+    private List<Rencontre> listeRencontres;
+
     @RequestMapping("/goToAccueil")
     private String gotoAccueil(@RequestParam(value = "logout", required = false) Boolean logout, Model model) {
 	List<Sport> listeSports = sportRepo.findAll();
@@ -69,13 +71,12 @@ public class ClientController {
 
 	if (!result.hasErrors()) {
 	    String email = client.getAuthentification().getEmail();
-	    Client other = clientRepo.findByAuthentificationEmail(email);
+	    Authentification other = authentificationRepo.findByEmail(email);
 	    if (other != null) {
 		result.rejectValue("authentification.email", "error.authentification.email.doublon");
 	    }
 	}
 	if (!result.hasErrors()) {
-
 	    encodePassword(client.getAuthentification());
 	    client.getAuthentification().setRole(ERole.ROLE_CLIENT);
 	    clientRepo.save(client);
@@ -89,7 +90,7 @@ public class ClientController {
     @RequestMapping("/goToRencontresAvenir")
     private String goToRencontresAvenir(Model model) {
 	Date now = new Date();
-	List<Rencontre> listeRencontres = rencontreRepo.findNextEvents(now);
+	listeRencontres = rencontreRepo.findNextEvents(now);
 	model.addAttribute("listeRencontres", listeRencontres);
 	return "rencontresAVenir";
     }
@@ -112,7 +113,7 @@ public class ClientController {
 	    pariRepo.save(pari);
 	    model.addAttribute("pari", new Pari());
 	    Date now = new Date();
-	    List<Rencontre> listeRencontres = rencontreRepo.findNextEvents(now);
+	    // List<Rencontre> listeRencontres = rencontreRepo.findNextEvents(now);
 	    model.addAttribute("listeRencontres", listeRencontres);
 	    return "rencontresAVenir";
 	} else {

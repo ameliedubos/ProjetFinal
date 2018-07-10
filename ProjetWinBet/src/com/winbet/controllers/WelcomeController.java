@@ -26,7 +26,6 @@ public class WelcomeController {
 
     @RequestMapping("/goToAccueil")
     public String goToAccueil(Model model) {
-
 	// à commenter
 	Admin admin = new Admin();
 	Authentification auth = new Authentification();
@@ -41,9 +40,11 @@ public class WelcomeController {
 	    List<Sport> listeSports = sportRepo.findAll();
 	    model.addAttribute("listeSports", listeSports);
 	    return "accueil";
+
 	}
 	// else if (AuthHelper.getRole().equals(ERole.ROLE_CLIENT))
 	else if (AuthHelper.getPrincipal().isAdministrateur())
+
 	    return "redirect:/admin/goToMenuAdmin";
 	else
 	    return "redirect:/client/goToMenuClient";
@@ -55,4 +56,5 @@ public class WelcomeController {
 	String encodedPassword = encoder.encode(rawPassword);
 	authentification.setMotDePasse(encodedPassword);
     }
+
 }
