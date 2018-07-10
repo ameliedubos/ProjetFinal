@@ -16,16 +16,50 @@
 
 </head>
 <body>
-
+<jsp:useBean id="now" class="java.util.Date"/>
 <div class="container">
-<br><br>
+<br>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand titre"><spring:message code="accueil.titre" /></a>
+    </div>
+    <ul class="nav navbar-nav">
+       <li class="active"><a href="<c:url value="/client/goToAccueil" />">Accueil</a></li>
+       <li class="active"><a href="<c:url value="/client/goToMenuClient" />">Mon Menu</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="accueil.deconnecter" /></a></li>
+    </ul>
+  </div>
+</nav>
+
+<div align="center">
+<img src="<c:url value="/static/images/multisports_bandeau.jpg" />" width="300" />
+</div>
+<br>
+
 <table class="table table-striped">
     <tr>
-    <td colspan="4"><h3>Liste des rencontres à venir</h3></td>
+    <td colspan="5"><h3>Liste des rencontres à venir</h3></td>
+    </tr>
+        <tr>
+    <th><spring:message code="rencontrePariees.sport"/>
+    </th>
+    <th><spring:message code="rencontrePariees.equipeDomicile"/><br>
+    <spring:message code="rencontrePariees.coteDomicile"/>
+    </th>
+    <th><spring:message code="rencontrePariees.equipeExterieure"/><br>
+    <spring:message code="rencontrePariees.coteExterieure"/>
+    </th>
+    <th><spring:message code="rencontrePariees.dates"/>
+    </th>
+    <th></th>
     </tr>
 	<c:forEach items="${listeRencontres}" var="rencontre">
 	    <tr>
-	    <td>Rencontre <c:out value = "${rencontre.id}"/><br>
+	    <td>
 	    <c:out value = "${rencontre.equipe1.sport.nom}"/>
 	    </td>
 	    <td><c:out value = "${rencontre.equipe1.nom}"/><br>
@@ -34,16 +68,16 @@
 	    <td><c:out value = "${rencontre.equipe2.nom}"/><br>
 	    <c:out value = "${rencontre.cote2}"/>
 	    </td>
+	    <td><fmt:formatDate type = "date" value = "${rencontre.dateDebut}" />
+	    <br>
+	    <fmt:formatDate type = "date" value = "${rencontre.dateFin}" />
+	    </td>
 	    <td><a href="<c:url value="/client/goToPari/${rencontre.id}" />">Parier</a></td>
 	    </tr>
       </c:forEach>
      
  </table>    
 
-
-<br>
-
-<a href="<c:url value="/client/goToAccueil" />">Retour à l'accueil</a>
 
 </div>
 </body>

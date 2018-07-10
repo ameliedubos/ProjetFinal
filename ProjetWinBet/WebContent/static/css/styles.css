@@ -1,11 +1,33 @@
 body{
 font-family:"Gadugi";
-font-size:15px;	
+font-size:16px;
+/* background-color: #e6f9ff; */
 }
 
-table { 
-    border-spacing: 30px;
+.tablecreerrencontre { 
+	align:center;
+    border-spacing: 20px;
     border-collapse: separate;
+}
+
+.tablecreerpari { 
+	align:center;
+    border-spacing: 20px;
+    border-collapse: separate;
+}
+
+.tableinscription { 
+	align:center;
+    border-spacing: 20px;
+    border-collapse: separate;
+}
+
+th{
+	text-align:center;
+}
+
+td{
+	text-align:center;
 }
 
 .titre {
@@ -26,13 +48,6 @@ text-align: center;
 font-size:25px;
 color: #800000;
 font-family:"Impact";
-}
-
-.background {
- background-image: url("/ProjetWinBet/static/images/multisports_bandeau.jpg");
- background-position: center;
- background-repeat: no-repeat;
- width: auto;
 }
 
 .error, .errors {

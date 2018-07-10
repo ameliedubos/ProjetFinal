@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,9 +21,13 @@
       <a class="navbar-brand titre"><spring:message code="accueil.titre" /></a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="<c:url value="/client/goToAccueil" />"><spring:message code="accueil.home" /></a></li>
       <li class="active"><a href="" data-toggle="modal" data-target="#myModal"><spring:message code="accueil.regle" /></a></li>
-      <li class="active"><a href="<c:url value="/welcome/goToAccueil" />"><spring:message code="accueil.menu" /></a></li>
+      <sec:authorize access="hasRole('ROLE_CLIENT')">
+      <li class="active"><a href="<c:url value="/client/goToMenuClient" />" ><spring:message code="accueil.menu" /></a></li>
+      </sec:authorize>
+      <sec:authorize access="hasRole('ROLE_ADMIN')">
+      <li class="active"><a href="<c:url value="/admin/goToMenuAdmin" />" ><spring:message code="accueil.menu" /></a></li>
+      </sec:authorize>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="<c:url value="/client/goToCreer" />"><span class="glyphicon glyphicon-user"></span> <spring:message code="accueil.inscrire" /></a></li>
@@ -62,18 +67,17 @@
 <c:if test="${param.logout}">
 	<span class="error"><spring:message code="authentification.logout" /></span>
 	</c:if>
-<table>
-<tr>
-<td><img src="<c:url value="/static/images/image1.jpeg" />" width="300" /></td>
-<td><img src="<c:url value="/static/images/image2.jpeg" />" width="500" /></td>
-</tr>
-</table>
+</div>
+
+<div align="center">
+<img src="<c:url value="/static/images/multisports_bandeau.jpg" />" width="900" />
 </div>
 
 <br>
 <br>
-
--------------------Slogan----------------------------------------------------------
+<div align="center">
+<h1>Ici vous pouvez pariez sur tous vos sports préférés!!</h1>
+</div>
 <br>
 <br>
 
@@ -85,6 +89,7 @@
  	  <c:out value="${sport.nom}" /><br>
  	  </c:forEach>
       </td>
+<td></td><td></td><td></td><td></td>
 <td>
 <div class="une">A la une aujourd'hui!!!!<br></div>
 <div class="unedetail">
