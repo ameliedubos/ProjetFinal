@@ -40,7 +40,7 @@ Bienvenue <sec:authentication property="principal.client.prenom"/>&nbsp;<sec:aut
 <img src="<c:url value="/static/images/multisports_bandeau.jpg" />" width="1000" />
 </div>
 <br><br>
-<h3><a href="<c:url value="/client/goToCompte" />">Consulter/Modifier son compte</a>
+<h3><a href="<c:url value="/client/goToConsulterCompte" />">Consulter/Modifier son compte</a>
 <br><br>
 <a href="<c:url value="/client/goToRencontresPariees" />">Afficher mes rencontres pariées</a>
 <br><br>

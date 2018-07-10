@@ -31,21 +31,21 @@ import com.winbet.entities.Sport;
 @RequestMapping("/client")
 public class ClientController {
 
-	@Autowired
-	private IClientJpaRepository clientRepo;
+    @Autowired
+    private IClientJpaRepository clientRepo;
 
-	@Autowired
-	private IAuthentificationJpaRepository authentificationRepo;
+    @Autowired
+    private IAuthentificationJpaRepository authentificationRepo;
 
-	@Autowired
-	private ISportJpaRepository sportRepo;
+    @Autowired
+    private ISportJpaRepository sportRepo;
 
-	@Autowired
-	private IRencontreJpaRepository rencontreRepo;
+    @Autowired
+    private IRencontreJpaRepository rencontreRepo;
 
-	@Autowired
-	private IPariJpaRepository pariRepo;
- 
+    @Autowired
+    private IPariJpaRepository pariRepo;
+
     @RequestMapping("/goToAccueil")
     private String gotoAccueil(@RequestParam(value = "logout", required = false) Boolean logout, Model model) {
 	List<Sport> listeSports = sportRepo.findAll();
@@ -63,90 +63,90 @@ public class ClientController {
 	model.addAttribute("client", new Client());
 	return "inscription";
     }
-   
-	@GetMapping("/goToConsulterCompte")
-	public String goToConsulterCompte(Model model) {
-		Client client=AuthHelper.getClient();
-		model.addAttribute("client", client);
-		return "inscription";
-	}
 
-	@PostMapping("/creer")
-	public String creer(@Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
+    @GetMapping("/goToConsulterCompte")
+    public String goToConsulterCompte(Model model) {
+	Client client = AuthHelper.getClient();
+	model.addAttribute("client", client);
+	return "inscription";
+    }
 
-		if (!result.hasErrors()) {
-		    String email = client.getAuthentification().getEmail();
-		    Authentification other = null;
-		    Long  AuthentificationId =  client.getAuthentification().getId();
-		    
-		    if(AuthentificationId == null) { // creation d'un compte
-				other = authentificationRepo.findByEmail(email);
-			}
-			else { // modification d'un compte
-				other = authentificationRepo.findAuthentificationByIdNotAndAuthentificationEmail(email, AuthentificationId);
-			}
-		    		    
-		    if (other != null) {
-			result.rejectValue("authentification.email", "error.authentification.email.doublon");
-		    }
-		}
-		if (!result.hasErrors()) {
-		    encodePassword(client.getAuthentification());
-		    client.getAuthentification().setRole(ERole.ROLE_CLIENT);
-		    clientRepo.save(client);
-		    model.addAttribute("client", new Client());
-		    return "accueil";
-		} else {
-		    return "inscription";
-		}
-	}
-		
-	@RequestMapping("/goToRencontresAvenir")
-	private String goToRencontresAvenir(Model model) {
-		Date now = new Date();
-		List<Rencontre> listeRencontres = rencontreRepo.findNextEvents(now);
-		model.addAttribute("listeRencontres", listeRencontres);
-		return "rencontresAVenir";
-	}
+    @PostMapping("/creer")
+    public String creer(@Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
 
-	@GetMapping("/goToPari/{id_rencontre}")
-	public String goToPari(@PathVariable(value = "id_rencontre", required = true) Long id_rencontre, Model model) {
-		Pari pari = new Pari();
-		pari.setRencontre(rencontreRepo.getOne(id_rencontre));
-		pari.setClient(AuthHelper.getClient());
-		model.addAttribute("pari", pari);
-		return "pari";
-	}
-	
-	@PostMapping("/pari")
-	private String Pari(@Valid @ModelAttribute(value = "pari") Pari pari, BindingResult result, Model model) {
-		if (pari.getSomme() > pari.getClient().getMontantMax()) {
-			result.rejectValue("somme", "error.pari.somme.excessive");
-		}
-		if (!result.hasErrors()) {
-			pariRepo.save(pari);
-			model.addAttribute("pari", new Pari());
-			Date now = new Date();
-			List<Rencontre> listeRencontres = rencontreRepo.findNextEvents(now);
-			model.addAttribute("listeRencontres", listeRencontres);
-			return "rencontresAVenir";
-		} else {
-			System.out.println(pari.getRencontre().getEquipe1());
-			return "pari";
-		}
-	}
-	
-	@RequestMapping("/goToRencontresPariees")
-	private String goToRencontresPariees(@ModelAttribute(value = "client") Client client, Model model) {
-		List<Pari> listePariByClient = pariRepo.findByClientId(AuthHelper.getClient().getId());
-		model.addAttribute("listePariByClient", listePariByClient);
-		return "rencontresPariees";
-	}
+	if (!result.hasErrors()) {
+	    String email = client.getAuthentification().getEmail();
+	    Authentification other = null;
+	    Client otherClient = null;
+	    Long id = client.getId();
 
-	private static void encodePassword(Authentification authentification) {
-		String rawPassword = authentification.getMotDePasse();
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String encodedPassword = encoder.encode(rawPassword);
-		authentification.setMotDePasse(encodedPassword);
+	    if (id == null) { // creation d'un compte
+		other = authentificationRepo.findByEmail(email);
+	    } else { // modification d'un compte
+		otherClient = clientRepo.findClientByIdNotAndAuthentificationEmail(id, email);
+	    }
+
+	    if (other != null) {
+		result.rejectValue("authentification.email", "error.authentification.email.doublon");
+	    }
 	}
+	if (!result.hasErrors()) {
+	    encodePassword(client.getAuthentification());
+	    client.getAuthentification().setRole(ERole.ROLE_CLIENT);
+	    clientRepo.save(client);
+	    model.addAttribute("client", new Client());
+	    return "accueil";
+	} else {
+	    return "inscription";
+	}
+    }
+
+    @RequestMapping("/goToRencontresAvenir")
+    private String goToRencontresAvenir(Model model) {
+	Date now = new Date();
+	List<Rencontre> listeRencontres = rencontreRepo.findNextEvents(now);
+	model.addAttribute("listeRencontres", listeRencontres);
+	return "rencontresAVenir";
+    }
+
+    @GetMapping("/goToPari/{id_rencontre}")
+    public String goToPari(@PathVariable(value = "id_rencontre", required = true) Long id_rencontre, Model model) {
+	Pari pari = new Pari();
+	pari.setRencontre(rencontreRepo.getOne(id_rencontre));
+	pari.setClient(AuthHelper.getClient());
+	model.addAttribute("pari", pari);
+	return "pari";
+    }
+
+    @PostMapping("/pari")
+    private String Pari(@Valid @ModelAttribute(value = "pari") Pari pari, BindingResult result, Model model) {
+	if (pari.getSomme() > pari.getClient().getMontantMax()) {
+	    result.rejectValue("somme", "error.pari.somme.excessive");
+	}
+	if (!result.hasErrors()) {
+	    pariRepo.save(pari);
+	    model.addAttribute("pari", new Pari());
+	    Date now = new Date();
+	    List<Rencontre> listeRencontres = rencontreRepo.findNextEvents(now);
+	    model.addAttribute("listeRencontres", listeRencontres);
+	    return "rencontresAVenir";
+	} else {
+	    System.out.println(pari.getRencontre().getEquipe1());
+	    return "pari";
+	}
+    }
+
+    @RequestMapping("/goToRencontresPariees")
+    private String goToRencontresPariees(@ModelAttribute(value = "client") Client client, Model model) {
+	List<Pari> listePariByClient = pariRepo.findByClientId(AuthHelper.getClient().getId());
+	model.addAttribute("listePariByClient", listePariByClient);
+	return "rencontresPariees";
+    }
+
+    private static void encodePassword(Authentification authentification) {
+	String rawPassword = authentification.getMotDePasse();
+	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	String encodedPassword = encoder.encode(rawPassword);
+	authentification.setMotDePasse(encodedPassword);
+    }
 }
