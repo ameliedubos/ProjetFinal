@@ -33,7 +33,7 @@
 		</div>
 	</form>
 		
-	<form method="POST" action="${pageContext.request.contextPath}/admin/modifier" modelAttribute="rencontre">
+	<form method="POST" action="${pageContext.request.contextPath}/admin/saisirResultat" modelAttribute="rencontre">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<form:hidden path="rencontre.id"/>
 		<div align="center">
@@ -56,48 +56,32 @@
 					<td><c:out value="${equipe2}" /><form:input type="hidden" path="rencontre.equipe2.id" class="form-control" /></td>
 					<td><form:errors path="rencontre.equipe2.id" cssClass="errors" /></td>
 				</tr>
+				
 				<tr>					
-					<td nowrap><form:label path="rencontre.cote1">
-							<spring:message code="creerRencontre.cote" />
+					<td nowrap><form:label path="rencontre.score">
+							<spring:message code="modifierRencontre.score" />
 							<span class="required">*</span>
 						</form:label></td>
 					<td></td>
-					<td nowrap><form:label path="rencontre.cote2">
-							<spring:message code="creerRencontre.cote" />
+					<td nowrap><form:label path="rencontre.vainqueur">
+							<spring:message code="modifierRencontre.vainqueur" />
 							<span class="required">*</span>
 						</form:label></td>
 					<td></td>
 				</tr>
 				<tr>
-					<td><form:input path="rencontre.cote1" class="form-control" required="required"/></td>
-					<td><form:errors path="rencontre.cote1" cssClass="errors" /></td>
-					<td><form:input path="rencontre.cote2" class="form-control" required="required"/></td>
-					<td><form:errors path="rencontre.cote2" cssClass="errors" /></td>
-				</tr>
-				<tr>					
-					<td nowrap><form:label path="rencontre.dateDebut">
-							<spring:message code="creerRencontre.dateDebut" />
-							<span class="required">*</span>
-						</form:label></td>
+					<td><form:input path="rencontre.score" class="form-control" required="required" /></td>
 					<td></td>
-					<td nowrap><form:label path="rencontre.dateFin">
-							<spring:message code="creerRencontre.dateFin" />
-							<span class="required">*</span>
-						</form:label></td>
-					<td></td>
-				</tr>
-				<tr>
 					<td>
-					<%-- <fmt:formatDate type = "both" timeStyle = "short" value="${now}"/> --%>
-					<form:input type="date" path="rencontre.dateDebut" class="form-control" required="required" />
-					</td>
-					<td></td>
-					<td><form:input type="date" path="rencontre.dateFin" class="form-control" required="required"/></td>
-					<td></td>
+					<form:select path="rencontre.vainqueur"  required="true">
+					<form:option value=""  label="---Sélectionner un vainqueur---" />
+						<form:option value="${equipe1id}"  label="${equipe1}" />
+						<form:option value="${equipe2id}"  label="${equipe2}" />
+					</form:select></td>
+					<td><form:errors path="rencontre.vainqueur" cssClass="errors" /></td>
 				</tr>
 				<tr>
-				<td colspan="4"><form:errors path="rencontre.dateDebut" cssClass="errors" />
-				<form:errors path="rencontre.dateFin" cssClass="errors" /></td>
+				<td colspan="4"><form:errors path="rencontre.score" cssClass="errors" /></td>
 				</tr>
 			</TABLE>
 		</div>

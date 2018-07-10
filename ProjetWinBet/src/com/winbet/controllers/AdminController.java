@@ -68,12 +68,8 @@ public class AdminController {
 	@PostMapping("/creer")
 	public String creer(@Valid @ModelAttribute(value = "rencontre") Rencontre rencontre, BindingResult result, Model model) {
 
-		if (!result.hasErrors() && rencontre.getDateFin().equals(null)) {
-			result.rejectValue("dateFin", "error.dateFinManquante");
-		}
-		
-		if (!result.hasErrors() && rencontre.getDateDebut().equals(null)) {
-			result.rejectValue("dateDebut", "error.dateDebutManquante");
+		if (!result.hasErrors() && rencontre.getEquipe1().getId().equals(rencontre.getEquipe2().getId())) {
+			result.rejectValue("equipe2", "error.memeEquipe");
 		}
 		
 		if (!result.hasErrors() && rencontre.getDateFin().before(rencontre.getDateDebut())) {
@@ -102,8 +98,8 @@ public class AdminController {
 		model.addAttribute("sport", rencontre.getEquipe1().getSport().getNom());
 		model.addAttribute("equipe1", rencontre.getEquipe1().getNom());
 		model.addAttribute("equipe2", rencontre.getEquipe2().getNom());
-		model.addAttribute("equipe1id", rencontre.getEquipe1().getId());
-		model.addAttribute("equipe2id", rencontre.getEquipe2().getId());
+//		model.addAttribute("equipe1id", rencontre.getEquipe1().getId());
+//		model.addAttribute("equipe2id", rencontre.getEquipe2().getId());
 		listeSports(model);
 		listeEquipes(model);
 		return "modifierRencontre";
@@ -112,14 +108,6 @@ public class AdminController {
 	@PostMapping("/modifier")
 	public String modifier(@Valid @ModelAttribute(value = "rencontre") Rencontre rencontre, BindingResult result,
 			Model model) {
-
-		if (!result.hasErrors() && rencontre.getDateFin().equals(null)) {
-			result.rejectValue("dateFin", "error.dateFinManquante");
-		}
-		
-		if (!result.hasErrors() && rencontre.getDateDebut().equals(null)) {
-			result.rejectValue("dateDebut", "error.dateDebutManquante");
-		}
 		
 		if (!result.hasErrors() && rencontre.getDateFin().before(rencontre.getDateDebut())) {
 			result.rejectValue("dateFin", "error.dateFin");
@@ -130,12 +118,45 @@ public class AdminController {
 		}
 		
 		if (!result.hasErrors()) {
-//			if (rencontre.getEquipe1().getId().equals(rencontre.getVainqueur())){
-//				rencontre.setVainqueur(rencontre.getEquipe1().getNom());
-//			}
-//			else {
-//				rencontre.setVainqueur(rencontre.getEquipe2().getNom());
-//			}
+			rencontreRepo.save(rencontre);
+			List<Rencontre> listeRencontres = rencontreRepo.findAll();
+			model.addAttribute("listeRencontres", listeRencontres);
+			return "menuAdmin";
+		} else {
+			Rencontre originelle = rencontreRepo.getOne(rencontre.getId());
+			model.addAttribute("sport", originelle.getEquipe1().getSport().getNom());
+			model.addAttribute("equipe1", originelle.getEquipe1().getNom());
+			model.addAttribute("equipe2", originelle.getEquipe2().getNom());
+//			model.addAttribute("equipe1id", originelle.getEquipe1().getId());
+//			model.addAttribute("equipe2id", originelle.getEquipe2().getId());
+			return "modifierRencontre";
+		}
+	}
+	
+	@RequestMapping("/goToSaisirResultat/{id}")
+	public String goToSaisirResultat(@PathVariable(value = "id", required = true) Long id, Model model) {
+		Rencontre rencontre = rencontreRepo.getOne(id);
+		model.addAttribute("rencontre", rencontre);
+		model.addAttribute("sport", rencontre.getEquipe1().getSport().getNom());
+		model.addAttribute("equipe1", rencontre.getEquipe1().getNom());
+		model.addAttribute("equipe2", rencontre.getEquipe2().getNom());
+		model.addAttribute("equipe1id", rencontre.getEquipe1().getId());
+		model.addAttribute("equipe2id", rencontre.getEquipe2().getId());
+		listeSports(model);
+		listeEquipes(model);
+		return "saisirResultat";
+	}
+	
+	@PostMapping("/saisirResultat")
+	public String saisirResultat(@Valid @ModelAttribute(value = "rencontre") Rencontre rencontre, BindingResult result,
+			Model model) {
+			
+		if (!result.hasErrors()) {
+			Rencontre originelle = rencontreRepo.getOne(rencontre.getId());
+			rencontre.setCote1(originelle.getCote1());
+			rencontre.setCote2(originelle.getCote2());
+			rencontre.setDateDebut(originelle.getDateDebut());
+			rencontre.setDateFin(originelle.getDateFin());
 			rencontreRepo.save(rencontre);
 			List<Rencontre> listeRencontres = rencontreRepo.findAll();
 			model.addAttribute("listeRencontres", listeRencontres);
@@ -147,7 +168,7 @@ public class AdminController {
 			model.addAttribute("equipe2", originelle.getEquipe2().getNom());
 			model.addAttribute("equipe1id", originelle.getEquipe1().getId());
 			model.addAttribute("equipe2id", originelle.getEquipe2().getId());
-			return "modifierRencontre";
+			return "saisirResultat";
 		}
 	}
 
