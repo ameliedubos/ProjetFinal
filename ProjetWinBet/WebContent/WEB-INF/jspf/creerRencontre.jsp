@@ -29,7 +29,7 @@
 		<div align="center">
 		<form:label path="rencontre.equipe1.sport.id"><spring:message code="creerRencontre.choixSport" /></form:label>
 		<form:select path="rencontre.equipe1.sport.id">
-			<form:option value="" label="" />
+			<form:option value="" label="---Sélectionner un sport---" />
 			<form:options items="${listeSports}" itemValue="id" itemLabel="nom" />
 		</form:select>
 		<input type="submit" class="btn btn-success" value="Valider" align="center" />
@@ -57,6 +57,8 @@
 					</form:select></td>
 					<td></td>
 				</tr>
+				<tr><td colspan="4"><form:errors path="rencontre.equipe2" cssClass="errors" /></td>
+				</tr>
 				<tr>					
 					<td nowrap><form:label path="rencontre.cote1">
 							<spring:message code="creerRencontre.cote" />
@@ -70,9 +72,9 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td><form:input path="rencontre.cote1" class="form-control" /></td>
+					<td><form:input path="rencontre.cote1" class="form-control" required="required" /></td>
 					<td><form:errors path="rencontre.cote1" cssClass="errors" /></td>
-					<td><form:input path="rencontre.cote2" class="form-control" /></td>
+					<td><form:input path="rencontre.cote2" class="form-control" required="required"/></td>
 					<td><form:errors path="rencontre.cote2" cssClass="errors" /></td>
 				</tr>
 				<tr>					
@@ -88,9 +90,9 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td><form:input type="date" path="rencontre.dateDebut" class="form-control" /></td>
+					<td><form:input type="date" path="rencontre.dateDebut" class="form-control" required="required"/></td>
 					<td></td>
-					<td><form:input type="date" path="rencontre.dateFin" class="form-control" /></td>
+					<td><form:input type="date" path="rencontre.dateFin" class="form-control" required="required"/></td>
 					<td></td>
 				</tr>
 				<tr>

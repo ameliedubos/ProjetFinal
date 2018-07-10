@@ -16,7 +16,7 @@
 
 </head>
 <body>
-
+<jsp:useBean id="now" class="java.util.Date"/>
 <div class="container">
 <br><br>
 <h2>
@@ -53,15 +53,28 @@ Bienvenue  <sec:authentication property="principal.admin.nom"/>
 	    <c:out value = "${rencontre.dateFin}"/>
 	    </td>
 	    <td>
-	    <c:if test="${empty rencontre.vainqueur}"><spring:message code="menuAdmin.encours"/></c:if>
-	     <c:if test="${not empty rencontre.vainqueur}"><c:out value = "${rencontre.vainqueur}"/><br>
+	    <c:if test="${rencontre.dateDebut > now}"><spring:message code="menuAdmin.nondebute"/></c:if>
+	    <c:if test="${rencontre.dateDebut < now && rencontre.dateFin > now}"><spring:message code="menuAdmin.encours"/></c:if>
+	    <c:if test="${rencontre.dateFin < now && empty rencontre.score}"><spring:message code="menuAdmin.enattente"/></c:if>
+	    <c:if test="${rencontre.equipe1.id==rencontre.vainqueur}"><c:out value = "${rencontre.equipe1.nom}"/><br>
+	    <c:out value = "${rencontre.score}"/></c:if>
+	    <c:if test="${rencontre.equipe2.id==rencontre.vainqueur}"><c:out value = "${rencontre.equipe2.nom}"/><br>
 	    <c:out value = "${rencontre.score}"/></c:if>
 	    </td>
-	    <td><a href="<c:url value="/admin/goToModifierRencontre/${rencontre.id}" />">Modifier la rencontre</a></td>
-	    <td><a href="<c:url value="/admin/supprimerRencontre/${rencontre.id}" />">Supprimer la rencontre</a></td>
+	    <td>
+	    <c:if test="${rencontre.dateDebut > now}">
+	    <a href="<c:url value="/admin/goToModifierRencontre/${rencontre.id}" />">Modifier la rencontre</a></td>
+	    </c:if>
+	    <c:if test="${rencontre.dateFin < now && empty rencontre.score}">
+	    <a href="<c:url value="/admin/goToSaisirResultat/${rencontre.id}" />">Saisir le résultat</a></td>
+	    </c:if>
+	    <td>
+	    <c:if test="${rencontre.dateDebut > now && empty rencontre.score}">
+	    <a href="<c:url value="/admin/supprimerRencontre/${rencontre.id}" />">Supprimer la rencontre</a>
+	    </c:if>
+	    </td>
 	    </tr>
-      </c:forEach>
-     
+	  </c:forEach>
  </table>    
 </div>
 

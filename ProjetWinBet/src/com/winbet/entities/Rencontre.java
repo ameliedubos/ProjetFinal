@@ -1,6 +1,5 @@
 package com.winbet.entities;
 
-import java.text.DateFormat;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -31,7 +30,7 @@ public class Rencontre {
 	private String score;
 	private String cote1;
 	private String cote2;
-	private String vainqueur;
+	private Long vainqueur;
 
 	public Rencontre() {
 
@@ -101,11 +100,11 @@ public class Rencontre {
 		this.score = score;
 	}
 
-	public String getVainqueur() {
+	public Long getVainqueur() {
 		return vainqueur;
 	}
 
-	public void setVainqueur(String vainqueur) {
+	public void setVainqueur(Long vainqueur) {
 		this.vainqueur = vainqueur;
 	}
 
