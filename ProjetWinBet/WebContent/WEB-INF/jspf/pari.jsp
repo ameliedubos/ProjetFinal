@@ -39,6 +39,7 @@
 			<form:input type="hidden" path="pari.client.id" class="form-control" />
 			<form:input type="hidden" path="pari.rencontre.equipe1.id" class="form-control" />
 			<form:input type="hidden" path="pari.rencontre.equipe2.id" class="form-control" />
+			<form:input type="hidden" path="pari.client.montantMax" class="form-control" />
 				<tr>					
 					<td nowrap>
 					<form:label path="pari.rencontre.equipe1.id">
@@ -91,7 +92,8 @@
 				
 				<tr>					
 					<td nowrap><form:label path="pari.somme">
-							<spring:message code="pari.somme" /> <span class="required">*</span><form:errors path="error.pari.somme" cssClass="errors" />
+							<spring:message code="pari.somme"/>(${pari.client.montantMax})
+							<span class="required">*</span> 
 						</form:label></td>
 					<td></td>
 					<td nowrap><form:label path="pari.vainqueur">
@@ -99,15 +101,17 @@
 						</form:label></td>
 					<td></td>
 				</tr>
+		
+			
 				<tr>
-					<td><form:input path="pari.somme" class="form-control" /></td>
-					<td><form:errors path="error.pari.somme" cssClass="errors" /></td>
+					<td><form:input path="pari.somme" class="form-control" />
+					<td><form:errors path="pari.somme" cssClass="errors" /></td>
 					<td>
 					<form:select path="pari.vainqueur"  required="true">
 						<form:option value="${pari.rencontre.equipe1.id}"  label="${pari.rencontre.equipe1.nom}" />
 						<form:option value="${pari.rencontre.equipe2.id}"  label="${pari.rencontre.equipe2.nom}" />
 					</form:select></td>
-					<td><form:errors path="error.pari.vainqueur" cssClass="errors" /></td>
+					<td><form:errors path="pari.vainqueur" cssClass="errors" /></td>
 				</tr>
 			</TABLE>
 		</div>
@@ -116,7 +120,7 @@
 			<input type="submit" class="btn btn-success" value="Valider" align="center" />
 			<br>
 			<br>
-			<a href="../goToMenuClient">Retour</a>
+			<a href="${pageContext.request.contextPath}/client/goToMenuClient">Retour</a>
 		</div>
 	</form>
 </body>
