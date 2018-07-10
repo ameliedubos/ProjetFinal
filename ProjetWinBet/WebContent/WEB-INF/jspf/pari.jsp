@@ -31,12 +31,14 @@
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<div align="center">
 			<spring:message code="modifierRencontre.sport" />
-			<c:out value="${pari.rencontre.equipe1.sport.nom}" />
+			<c:out value="${pari.rencontre.equipe1.sport.nom}" /><form:input type="hidden" path="pari.rencontre.equipe1.sport.nom" class="form-control" />
 		</div>
 		<div align="center">
 			<TABLE BORDER=0>
 			<form:input type="hidden" path="pari.rencontre.id" class="form-control" />
 			<form:input type="hidden" path="pari.client.id" class="form-control" />
+			<form:input type="hidden" path="pari.rencontre.equipe1.id" class="form-control" />
+			<form:input type="hidden" path="pari.rencontre.equipe2.id" class="form-control" />
 				<tr>					
 					<td nowrap>
 					<form:label path="pari.rencontre.equipe1.id">
@@ -50,15 +52,11 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td><c:out value="${pari.rencontre.equipe1.nom}" /><form:input type="hidden" path="pari.rencontre.equipe1" class="form-control" /></td><td></td>
-					<td><c:out value="${pari.rencontre.equipe2.nom}" /><form:input type="hidden" path="pari.rencontre.equipe2" class="form-control" /></td>
+					<td><c:out value="${pari.rencontre.equipe1.nom}" /><form:input type="hidden" path="pari.rencontre.equipe1.nom" class="form-control" /></td><td></td>
+					<td><c:out value="${pari.rencontre.equipe2.nom}" /><form:input type="hidden" path="pari.rencontre.equipe2.nom" class="form-control" /></td>
+					<form:input type="hidden" path="pari.rencontre.equipe1.id" class="form-control" />
+					<form:input type="hidden" path="pari.rencontre.equipe2.id" class="form-control" />
 				</tr>
-<!-- 				<tr> -->
-<%--  					<td><c:out value="${equipe1}" /><form:input type="hidden" path="pari.rencontre.equipe1.id" class="form-control" /></td>						 --%>
-<%--  					<td><form:errors path="rencontre.equipe1.id" cssClass="errors" /></td> --%>
-<%-- 					<td><c:out value="${equipe2}" /><form:input type="hidden" path="pari.rencontre.equipe2.id" class="form-control" /></td> --%>
-<%-- 					<td><form:errors path="rencontre.equipe2.id" cssClass="errors" /></td> --%>
-<!-- 				</tr> -->
 				<tr>					
 					<td nowrap><form:label path="pari.rencontre.cote1">
 							<spring:message code="creerRencontre.cote" />
@@ -93,7 +91,7 @@
 				
 				<tr>					
 					<td nowrap><form:label path="pari.somme">
-							<spring:message code="pari.somme" /> <span class="required">*</span>
+							<spring:message code="pari.somme" /> <span class="required">*</span><form:errors path="error.pari.somme" cssClass="errors" />
 						</form:label></td>
 					<td></td>
 					<td nowrap><form:label path="pari.vainqueur">
@@ -106,8 +104,8 @@
 					<td><form:errors path="error.pari.somme" cssClass="errors" /></td>
 					<td>
 					<form:select path="pari.vainqueur"  required="true">
-						<form:option value="${equipe1id}"  label="${equipe1}" />
-						<form:option value="${equipe2id}"  label="${equipe2}" />
+						<form:option value="${pari.rencontre.equipe1.id}"  label="${pari.rencontre.equipe1.nom}" />
+						<form:option value="${pari.rencontre.equipe2.id}"  label="${pari.rencontre.equipe2.nom}" />
 					</form:select></td>
 					<td><form:errors path="error.pari.vainqueur" cssClass="errors" /></td>
 				</tr>

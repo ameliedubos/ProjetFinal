@@ -100,11 +100,6 @@ public class ClientController {
 	pari.setRencontre(rencontreRepo.getOne(id_rencontre));
 	pari.setClient(AuthHelper.getClient());
 	model.addAttribute("pari", pari);
-	model.addAttribute("sport", pari.getRencontre().getEquipe1().getSport().getNom());
-	model.addAttribute("equipe1", pari.getRencontre().getEquipe1().getNom());
-	model.addAttribute("equipe2", pari.getRencontre().getEquipe2().getNom());
-	model.addAttribute("equipe1id", pari.getRencontre().getEquipe1().getId());
-	model.addAttribute("equipe2id", pari.getRencontre().getEquipe2().getId());
 	return "pari";
     }
 
@@ -121,7 +116,6 @@ public class ClientController {
 	    model.addAttribute("listeRencontres", listeRencontres);
 	    return "rencontresAVenir";
 	} else {
-	    // Pari originel=new Pari();
 	    System.out.println(pari.getRencontre().getEquipe1());
 	    return "pari";
 	}
