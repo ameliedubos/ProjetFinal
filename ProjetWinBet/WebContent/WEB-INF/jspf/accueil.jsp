@@ -98,13 +98,6 @@ Faites vos paris!
 </div>
 
 
-
-
 </div>
-
-
-    
-
-
 </body>
 </html>
