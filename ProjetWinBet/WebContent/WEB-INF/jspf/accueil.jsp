@@ -30,9 +30,13 @@
       </sec:authorize>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+    <sec:authorize access="!hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')">
       <li><a href="<c:url value="/client/goToCreer" />"><span class="glyphicon glyphicon-user"></span> <spring:message code="accueil.inscrire" /></a></li>
       <li><a href="<c:url value="/securitycontroller/login" />"><span class="glyphicon glyphicon-log-in"></span> <spring:message code="accueil.identifier" /></a></li>
+      </sec:authorize>
+      <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')">
       <li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="accueil.deconnecter" /></a></li>
+      </sec:authorize>
     </ul>
   </div>
 </nav>

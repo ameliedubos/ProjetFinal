@@ -97,7 +97,10 @@ public class ClientController {
 	    client.getAuthentification().setRole(ERole.ROLE_CLIENT);
 	    clientRepo.save(client);
 	    model.addAttribute("client", new Client());
-	    return "accueil";
+	    if (AuthHelper.isAuthenticated())
+		return "menuClient";
+	    else
+		return "accueil";
 	} else {
 	    return "inscription";
 	}
@@ -117,7 +120,7 @@ public class ClientController {
     public String goToPari(@PathVariable(value = "id_rencontre", required = true) Long id_rencontre, Model model) {
 	Pari pari = new Pari();
 	pari.setRencontre(rencontreRepo.getOne(id_rencontre));
-	pari.setClient(AuthHelper.getClient());
+	pari.setClient(clientRepo.getOne(AuthHelper.getClient().getId()));
 	model.addAttribute("pari", pari);
 	return "pari";
     }
@@ -131,12 +134,10 @@ public class ClientController {
 	if (!result.hasErrors()) {
 	    pariRepo.save(pari);
 	    model.addAttribute("pari", new Pari());
-	    Date now = new Date();
-	    List<Rencontre> listeRencontres = rencontreRepo.findNextEvents(now);
-	    model.addAttribute("listeRencontres", listeRencontres);
-	    return "menuClient";
+	    List<Pari> listePariByClient = pariRepo.findByClientId(AuthHelper.getClient().getId());
+	    model.addAttribute("listePariByClient", listePariByClient);
+	    return "rencontresPariees";
 	} else {
-	    System.out.println(pari.getRencontre().getEquipe1());
 	    return "pari";
 	}
     }

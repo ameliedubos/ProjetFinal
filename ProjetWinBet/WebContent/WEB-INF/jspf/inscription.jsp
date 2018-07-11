@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
 <html>
@@ -105,7 +106,9 @@
 			</div>
 		</div>
 		<div align="center">
-			<input type="submit" class="btn btn-primary" value="Valider" align="center" />&nbsp;&nbsp;&nbsp;<a class="btn btn-danger" href="goToAccueil">Retour</a>
+			<input type="submit" class="btn btn-primary" value="Valider" align="center" />&nbsp;&nbsp;&nbsp;
+			<sec:authorize access="!hasRole('ROLE_CLIENT')"><a class="btn btn-danger" href="goToAccueil">Retour</a></sec:authorize>
+			<sec:authorize access="hasRole('ROLE_CLIENT')"><a class="btn btn-danger" href="goToMenuClient">Retour</a></sec:authorize>
 		</div>
 	</form>
 	</div>

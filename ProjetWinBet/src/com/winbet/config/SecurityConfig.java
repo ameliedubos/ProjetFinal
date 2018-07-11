@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.loginProcessingUrl("/login").defaultSuccessUrl("/welcome/goToAccueil", true)
 		.failureUrl("/securitycontroller/login?error=true").permitAll().and().logout()
 		.invalidateHttpSession(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/client/goToAccueil?logout=true").permitAll();
+		.logoutSuccessUrl("/welcome/goToAccueil?logout=true").permitAll();
 
     }
 
