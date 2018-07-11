@@ -58,12 +58,12 @@
 				</tr>
 				<tr>					
 					<td nowrap><form:label path="rencontre.cote1">
-							<spring:message code="creerRencontre.cote" />
+							<spring:message code="creerRencontre.coteDomicile" />
 							<span class="required">*</span>
 						</form:label></td>
 					<td></td>
 					<td nowrap><form:label path="rencontre.cote2">
-							<spring:message code="creerRencontre.cote" />
+							<spring:message code="creerRencontre.coteExterieure" />
 							<span class="required">*</span>
 						</form:label></td>
 					<td></td>

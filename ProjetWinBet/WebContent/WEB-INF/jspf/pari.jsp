@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
@@ -16,6 +17,25 @@
 <link href="<c:url value="/static/css/styles.css" />" rel="stylesheet">
 </head>
 <body>
+<jsp:useBean id="now" class="java.util.Date"/>
+<div class="container">
+<br>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand titre"><spring:message code="accueil.titre" /></a>
+    </div>
+    <ul class="nav navbar-nav">
+       <li class="active"><a href="<c:url value="/client/goToAccueil" />">Accueil</a></li>
+       <li class="active"><a href="<c:url value="/client/goToMenuClient" />">Mon Menu</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="accueil.deconnecter" /></a></li>
+    </ul>
+  </div>
+</nav>
+
+
 	<div align="center">
 		<h1>
 			<spring:message code="pari.titre" />
@@ -34,7 +54,7 @@
 			<c:out value="${pari.rencontre.equipe1.sport.nom}" /><form:input type="hidden" path="pari.rencontre.equipe1.sport.nom" class="form-control" />
 		</div>
 		<div align="center">
-			<TABLE BORDER=0>
+			<TABLE class="tablecreerpari">
 			<form:input type="hidden" path="pari.rencontre.id" class="form-control" />
 			<form:input type="hidden" path="pari.client.id" class="form-control" />
 			<form:input type="hidden" path="pari.rencontre.equipe1.id" class="form-control" />
@@ -60,11 +80,11 @@
 				</tr>
 				<tr>					
 					<td nowrap><form:label path="pari.rencontre.cote1">
-							<spring:message code="creerRencontre.cote" />
+							<spring:message code="creerRencontre.coteDomicile" />
 						</form:label></td>
 					<td></td>
 					<td nowrap><form:label path="pari.rencontre.cote2">
-							<spring:message code="creerRencontre.cote" />
+							<spring:message code="creerRencontre.coteExterieure" />
 						</form:label></td>
 					<td></td>
 				</tr>
@@ -85,8 +105,9 @@
 				</tr>
 	
 				<tr>
-					<td><c:out value="${pari.rencontre.dateDebut}" /><form:input type="hidden" path="pari.rencontre.dateDebut" class="form-control" /></td><td></td>
-					<td><c:out value="${pari.rencontre.dateFin}" /><form:input type="hidden" path="pari.rencontre.dateFin" class="form-control" /></td>
+
+					<td><fmt:formatDate type = "date" value = "${pari.rencontre.dateDebut}" /><form:input type="hidden" path="pari.rencontre.dateDebut" class="form-control" /></td><td></td>
+					<td><fmt:formatDate type = "date" value = "${pari.rencontre.dateFin}" /><form:input type="hidden" path="pari.rencontre.dateFin" class="form-control" /></td>
 	
 				</tr>
 				
@@ -120,8 +141,9 @@
 			<input type="submit" class="btn btn-success" value="Valider" align="center" />
 			<br>
 			<br>
-			<a href="${pageContext.request.contextPath}/client/goToMenuClient">Retour</a>
 		</div>
 	</form>
+	
+	</div>
 </body>
 </html>

@@ -18,16 +18,40 @@
 <body>
 <jsp:useBean id="now" class="java.util.Date"/>
 <div class="container">
+
 <br><br>
-<h2>
-Bienvenue  <sec:authentication property="principal.client.nom"/>
-</h2>
-<br><br>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand titre"><spring:message code="accueil.titre" /></a>
+    </div>
+    <ul class="nav navbar-nav">
+       <li class="active"><a href="<c:url value="/client/goToAccueil" />">Accueil</a></li>
+       <li class="active"><a href="<c:url value="/client/goToMenuClient" />">Mon Menu</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="accueil.deconnecter" /></a></li>
+    </ul>
+  </div>
+</nav>
+<br>
+
+<div align="center">
+<img src="<c:url value="/static/images/multisports_bandeau.jpg" />" width="300" />
+</div>
+
+<br>
 <div text-align="center">
-<table class="table table-striped"><!-- Tableau 7 colonnes et n lignes -->
+<table class="table table-striped table-bordered">
     <tr>
-    <td colspan="9"><h3>Liste de vos paris</h3></td>
+    <td colspan="10"><h3>Liste de vos paris</h3></td>
     </tr>
+        <tr>
+    <td colspan="5"><h4>Détail de la rencontre</h4></td>
+    <td colspan="4"><h4>Détail du pari</h4></td>
+    </tr>
+    <tr>
     <th><spring:message code="rencontrePariees.sport"/>
     </th>
     <th><spring:message code="rencontrePariees.equipeDomicile"/>
@@ -42,15 +66,15 @@ Bienvenue  <sec:authentication property="principal.client.nom"/>
     <th><spring:message code="rencontrePariees.vainqueur"/>
     <spring:message code="rencontrePariees.score"/>
     </th>
-    <th></th>
      <th><spring:message code="rencontrePariees.choixVainqueur"/>
     </th>
     <th><spring:message code="rencontrePariees.somme"/>
     </th>
     <th><spring:message code="rencontrePariees.resuPari"/>
     </th>
-    <th><spring:message code="rencontrePariees.gainPari"/>
+    <th><spring:message code="rencontrePariees.gainPari"/><br>(<spring:message code="rencontrePariees.devise"/>)
     </th>
+    </tr>
 	<c:forEach items="${listePariByClient}" var="pari">
 	    <tr>
 	    <td><c:out value = "${pari.rencontre.equipe1.sport.nom}"/></td>
@@ -69,7 +93,6 @@ Bienvenue  <sec:authentication property="principal.client.nom"/>
 	    <c:if test="${pari.rencontre.equipe2.id==pari.rencontre.vainqueur}"><c:out value = "${pari.rencontre.equipe2.nom}"/><br>
 	    <c:out value = "${pari.rencontre.score}"/></c:if>
 	    </td>
-	    <td>colonne vide</td>
 	    <td><c:if test="${pari.rencontre.equipe1.id==pari.vainqueur}"><c:out value = "${pari.rencontre.equipe1.nom}"/><br>
 	    </c:if>
 	    <c:if test="${pari.rencontre.equipe2.id==pari.vainqueur}"><c:out value = "${pari.rencontre.equipe2.nom}"/><br>
@@ -78,21 +101,26 @@ Bienvenue  <sec:authentication property="principal.client.nom"/>
 	    <td><c:out value = "${pari.somme}"/>
 	    </td>
 	    <td>
-	    <c:if test="${pari.rencontre.vainqueur==pari.vainqueur}"><spring:message code="rencontrePariees.gagne"/></c:if>
-	    <c:if test="${pari.rencontre.vainqueur!=pari.vainqueur}"><spring:message code="rencontrePariees.perdu"/></c:if>
+	    <c:if test="${empty pari.rencontre.vainqueur}"><spring:message code="rencontrePariees.vide"/></c:if>
+	    <c:if test="${pari.rencontre.vainqueur==pari.vainqueur && not empty pari.rencontre.vainqueur}"><spring:message code="rencontrePariees.gagne"/></c:if>
+	    <c:if test="${pari.rencontre.vainqueur!=pari.vainqueur && not empty pari.rencontre.vainqueur}"><spring:message code="rencontrePariees.perdu"/></c:if>
 	    </td>
 	    <td>
-	    <c:if test="${pari.rencontre.vainqueur!=pari.vainqueur}">
+	    <c:if test="${empty pari.rencontre.vainqueur}">
+	    <c:set var="gain" value="" />
+	    <c:out value = "${gain}"/>
+	    </c:if>
+	    <c:if test="${pari.rencontre.vainqueur!=pari.vainqueur && not empty pari.rencontre.vainqueur}">
 	    <c:set var="gain" value="0" />
 	    <c:out value = "${gain}"/>
 	    </c:if>
-	    <c:if test="${pari.rencontre.vainqueur==pari.vainqueur && pari.rencontre.vainqueur==pari.rencontre.equipe1.id}">
+	    <c:if test="${pari.rencontre.vainqueur==pari.vainqueur && pari.rencontre.vainqueur==pari.rencontre.equipe1.id && not empty pari.rencontre.vainqueur}">
 	    <c:set var="gain" value="${pari.somme * pari.rencontre.cote1}" />
 	    <c:out value = "${gain}"/>
 	    </c:if>
-	    <c:if test="${pari.rencontre.vainqueur==pari.vainqueur && pari.rencontre.vainqueur==pari.rencontre.equipe2.id}">
+	    <c:if test="${pari.rencontre.vainqueur==pari.vainqueur && pari.rencontre.vainqueur==pari.rencontre.equipe2.id && not empty pari.rencontre.vainqueur}">
 	    <c:set var="gain" value="${pari.somme * pari.rencontre.cote2}" />
-	    <c:out value = "${gain}"/><spring:message code="rencontrePariees.devise"/>
+	    <c:out value = "${gain}"/>
 	    </c:if>
 	    </td>
 	    </tr>
@@ -100,12 +128,6 @@ Bienvenue  <sec:authentication property="principal.client.nom"/>
  </table>    
 </div>
 
-
-
-
-<br>
-<a href="<c:url value="/client/goToMenuClient" />">Retour au menu</a><br>
-<a href="<c:url value="/client/goToAccueil" />">Retour à l'accueil</a>
 
 </div>
 

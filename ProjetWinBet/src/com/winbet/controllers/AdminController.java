@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +25,7 @@ import com.winbet.entities.Sport;
 
 @Controller
 @RequestMapping("/admin")
-// @Secured("ROLE_ADMIN")
+@Secured("ROLE_ADMIN")
 public class AdminController {
 
     @Autowired
@@ -40,13 +41,13 @@ public class AdminController {
     private IPariJpaRepository pariRepo;
 
     @RequestMapping("/goToAccueil")
-    private String gotoAccueil(Model model) {
+    public String gotoAccueil(Model model) {
 	listeSports(model);
 	return "accueil";
     }
 
     @RequestMapping("/goToMenuAdmin")
-    private String gotoMenuAdmin(Model model) {
+    public String gotoMenuAdmin(Model model) {
 	List<Rencontre> listeRencontres = rencontreRepo.findAll();
 	model.addAttribute("listeRencontres", listeRencontres);
 	return "menuAdmin";
@@ -178,10 +179,11 @@ public class AdminController {
     public String supprimerRencontre(@PathVariable(value = "id", required = true) Long id, Model model) {
 	if (pariRepo.findByRencontreId(id).isEmpty()) {
 	    rencontreRepo.deleteById(id);
-	    model.addAttribute("message", "La rencontre a été supprimée.");
+	    model.addAttribute("message", "0");// La rencontre a été supprimée.
 	} else {
-	    model.addAttribute("message", "La rencontre n'a pas été supprimée car il y a des paris en cours.");
+	    model.addAttribute("message", "1");// La rencontre n'a pas été supprimée car il y a des paris en cours.
 	}
+
 	List<Rencontre> listeRencontres = rencontreRepo.findAll();
 	model.addAttribute("listeRencontres", listeRencontres);
 	return "menuAdmin";

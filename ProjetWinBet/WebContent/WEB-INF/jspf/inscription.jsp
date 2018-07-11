@@ -5,25 +5,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Création de compte</title>
+<title>Mon compte</title>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="<c:url value="/static/css/styles.css" />" rel="stylesheet">
+  <link href="<c:url value="/static/css/styles.css" />" rel="stylesheet">
 </head>
 <body>
-<div class="background">
+<div class="container">
 	<div align="center">
 		<h1>
 			<spring:message code="inscription.creation" />
-		<br><br>
 		</h1>
 	</div>
-	<br>
+	<div class="form-group">
 	<form method="POST" action="creer" modelAttribute="client">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<form:hidden path="client.id" />
+	<form:hidden path="client.authentification.id" />
 		<div align="center">
-			<TABLE BORDER=0>
+			<TABLE class="tableinscription" BORDER=0>
 				<tr>
 					<td nowrap><form:label path="client.nom">
 							<spring:message code="client.nom" /><span class="required">*</span>
@@ -100,11 +102,10 @@
 					<td><form:errors path="client.montantMax" cssClass="errors" /></td>
 				</tr>
 			</TABLE>
+			</div>
 		</div>
-		<br>
 		<div align="center">
-			<input type="submit" class="btn btn-success" value="Valider"
-				align="center" /> <br> <br> <a href="goToAccueil">Retour</a>
+			<input type="submit" class="btn btn-primary" value="Valider" align="center" />&nbsp;&nbsp;&nbsp;<a class="btn btn-danger" href="goToAccueil">Retour</a>
 		</div>
 	</form>
 	</div>

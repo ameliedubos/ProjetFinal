@@ -19,11 +19,37 @@
 <jsp:useBean id="now" class="java.util.Date"/>
 <div class="container">
 <br><br>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand titre"><spring:message code="accueil.titre" /></a>
+    </div>
+    <ul class="nav navbar-nav">
+       <li class="active"><a href="<c:url value="/admin/goToAccueil" />">Accueil</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="accueil.deconnecter" /></a></li>
+    </ul>
+  </div>
+</nav>
+
+
 <h2>
-Bienvenue  <sec:authentication property="principal.admin.nom"/>
+Bienvenue  <sec:authentication property="principal.admin.prenom"/>&nbsp;<sec:authentication property="principal.admin.nom"/>
 </h2>
+
+<div align="center">
+<img src="<c:url value="/static/images/multisports_bandeau.jpg" />" width="200" />
+</div>
 <br><br>
-${message}
+<div class="error">
+<c:if test="${message eq '0'}"><spring:message code="menuAdmin.supprime"/></c:if>
+</div>
+<div class="error">
+<c:if test="${message eq '1'}"><spring:message code="menuAdmin.nonSupprime"/></c:if>
+</div>
+<br>
 <div text-align="center">
 <table class="table table-striped"><!-- Tableau 7 colonnes et n lignes -->
     <tr>
@@ -31,15 +57,15 @@ ${message}
     </tr>
     <th><spring:message code="menuAdmin.sport"/>
     </th>
-    <th><spring:message code="menuAdmin.equipeDomicile"/>
+    <th><spring:message code="menuAdmin.equipeDomicile"/><br>
     <spring:message code="menuAdmin.coteDomicile"/>
     </th>
-    <th><spring:message code="menuAdmin.equipeExterieure"/>
+    <th><spring:message code="menuAdmin.equipeExterieure"/><br>
     <spring:message code="menuAdmin.coteExterieure"/>
     </th>
     <th><spring:message code="menuAdmin.dates"/>
     </th>
-    <th><spring:message code="menuAdmin.vainqueur"/>
+    <th><spring:message code="menuAdmin.vainqueur"/><br>
     <spring:message code="menuAdmin.score"/>
     </th>
 	<c:forEach items="${listeRencontres}" var="rencontre">
@@ -79,13 +105,11 @@ ${message}
 	  </c:forEach>
  </table>    
 </div>
-
+<h3>
 <a href="<c:url value="/admin/goToCreerRencontre" />">Créer une rencontre</a>
+</h3>
 
 
-<br>
-
-<a href="<c:url value="/admin/goToAccueil" />">Retour à l'accueil</a>
 
 </div>
 </body>

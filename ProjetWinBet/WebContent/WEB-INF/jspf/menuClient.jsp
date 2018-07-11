@@ -16,19 +16,37 @@
 <body>
 
 <div class="container">
+<br>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand titre"><spring:message code="accueil.titre" /></a>
+    </div>
+    <ul class="nav navbar-nav">
+       <li class="active"><a href="<c:url value="/client/goToAccueil" />">Accueil</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="accueil.deconnecter" /></a></li>
+    </ul>
+  </div>
+</nav>
+
 <h2>
-Bienvenue <sec:authentication property="principal.client.nom"/>
+Bienvenue <sec:authentication property="principal.client.prenom"/>&nbsp;<sec:authentication property="principal.client.nom"/>
 </h2>
-<br>
-<a href="<c:url value="/client/goToCompte" />">Consulter son compte</a>
-<br>
-<a href="<c:url value="/client/goToRencontresPariees" />">Afficher la liste de mes rencontres pariées</a>
-<br>
-<a href="<c:url value="/client/goToRencontresAvenir" />">afficher la liste des rencontres à venir</a>
-<br>
-<br>
-<br>
-<a href="<c:url value="/client/goToAccueil" />">Retour à l'accueil</a>
+
+<br><br>
+<div align="center">
+<img src="<c:url value="/static/images/multisports_bandeau.jpg" />" width="1000" />
+</div>
+<br><br>
+<h3><a href="<c:url value="/client/goToConsulterCompte" />">Consulter/Modifier son compte</a>
+<br><br>
+<a href="<c:url value="/client/goToRencontresPariees" />">Afficher mes rencontres pariées</a>
+<br><br>
+<a href="<c:url value="/client/goToRencontresAvenir" />">Parier sur les prochaines rencontres</a>
+</h3>
+
 
 </div>
 </body>
