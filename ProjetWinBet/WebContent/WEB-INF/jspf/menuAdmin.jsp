@@ -43,7 +43,13 @@ Bienvenue  <sec:authentication property="principal.admin.prenom"/>&nbsp;<sec:aut
 <img src="<c:url value="/static/images/multisports_bandeau.jpg" />" width="200" />
 </div>
 <br><br>
-
+<div class="error">
+<c:if test="${message eq '0'}"><spring:message code="menuAdmin.supprime"/></c:if>
+</div>
+<div class="error">
+<c:if test="${message eq '1'}"><spring:message code="menuAdmin.nonSupprime"/></c:if>
+</div>
+<br>
 <div text-align="center">
 <table class="table table-striped"><!-- Tableau 7 colonnes et n lignes -->
     <tr>

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.winbet.dao.IEquipeJpaRepository;
+import com.winbet.dao.IPariJpaRepository;
 import com.winbet.dao.IRencontreJpaRepository;
 import com.winbet.dao.ISportJpaRepository;
 import com.winbet.entities.Equipe;
@@ -23,6 +25,7 @@ import com.winbet.entities.Sport;
 
 @Controller
 @RequestMapping("/admin")
+@Secured("ROLE_ADMIN")
 public class AdminController {
 
     @Autowired
@@ -34,14 +37,17 @@ public class AdminController {
     @Autowired
     private IEquipeJpaRepository equipeRepo;
 
+    @Autowired
+    private IPariJpaRepository pariRepo;
+
     @RequestMapping("/goToAccueil")
-    private String gotoAccueil(Model model) {
+    public String gotoAccueil(Model model) {
 	listeSports(model);
 	return "accueil";
     }
 
     @RequestMapping("/goToMenuAdmin")
-    private String gotoMenuAdmin(Model model) {
+    public String gotoMenuAdmin(Model model) {
 	List<Rencontre> listeRencontres = rencontreRepo.findAll();
 	model.addAttribute("listeRencontres", listeRencontres);
 	return "menuAdmin";
@@ -171,7 +177,13 @@ public class AdminController {
 
     @RequestMapping("/supprimerRencontre/{id}")
     public String supprimerRencontre(@PathVariable(value = "id", required = true) Long id, Model model) {
-	rencontreRepo.deleteById(id);
+	if (pariRepo.findByRencontreId(id).isEmpty()) {
+	    rencontreRepo.deleteById(id);
+	    model.addAttribute("message", "0");// La rencontre a été supprimée.
+	} else {
+	    model.addAttribute("message", "1");// La rencontre n'a pas été supprimée car il y a des paris en cours.
+	}
+
 	List<Rencontre> listeRencontres = rencontreRepo.findAll();
 	model.addAttribute("listeRencontres", listeRencontres);
 	return "menuAdmin";

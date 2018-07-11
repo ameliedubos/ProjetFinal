@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.winbet.entities.Pari;
 
 public interface IPariJpaRepository extends JpaRepository<Pari, Long> {
-	
-	public List<Pari> findByClientId(Long id);
+
+    public List<Pari> findByClientId(Long id);
+
+    public List<Pari> findByRencontreId(Long id);
 
 }
