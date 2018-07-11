@@ -141,7 +141,6 @@
 			<input type="submit" class="btn btn-success" value="Valider" align="center" />
 			<br>
 			<br>
-			<a href="${pageContext.request.contextPath}/client/goToMenuClient">Retour</a>
 		</div>
 	</form>
 	

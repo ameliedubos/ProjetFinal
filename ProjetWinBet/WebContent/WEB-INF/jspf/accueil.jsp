@@ -69,43 +69,42 @@
 	</c:if>
 </div>
 
+<div class="slogan" align="center">
+Ici vous pouvez pariez sur tous vos sports préférés!!
+</div>
+<br>
+<br>
+
 <div align="center">
 <img src="<c:url value="/static/images/multisports_bandeau.jpg" />" width="900" />
 </div>
 
 <br>
 <br>
-<div align="center">
-<h1>Ici vous pouvez pariez sur tous vos sports préférés!!</h1>
-</div>
-<br>
-<br>
 
-<div align="center">
-<table>
-<tr>
-<td>Liste des sports:<br>    
+<div class="listesport" align="center">
+   
       <c:forEach items="${listeSports}" var="sport">
- 	  <c:out value="${sport.nom}" /><br>
+ 	  <c:out value="${sport.nom}" />&nbsp;,
  	  </c:forEach>
-      </td>
-<td></td><td></td><td></td><td></td>
-<td>
+</div>
+<br><br>
+
 <div class="une">A la une aujourd'hui!!!!<br></div>
 <div class="unedetail">
-France-Uruguay<br>
-Le 06 Juillet à 16h<br>
+France-Angleterre<br>
+Le 15 Juillet à 17h<br>
 Faites vos paris!
 </div>
 
-</td>
-</tr>
-</table>
+
+
+
 </div>
 
 
     
 
-</div>
+
 </body>
 </html>
