@@ -23,6 +23,7 @@
 Bienvenue  <sec:authentication property="principal.admin.nom"/>
 </h2>
 <br><br>
+${message}
 <div text-align="center">
 <table class="table table-striped"><!-- Tableau 7 colonnes et n lignes -->
     <tr>

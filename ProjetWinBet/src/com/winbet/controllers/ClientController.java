@@ -46,8 +46,6 @@ public class ClientController {
     @Autowired
     private IPariJpaRepository pariRepo;
 
-    private List<Rencontre> listeRencontres;
-
     @RequestMapping("/goToAccueil")
     private String gotoAccueil(@RequestParam(value = "logout", required = false) Boolean logout, Model model) {
 	List<Sport> listeSports = sportRepo.findAll();
@@ -55,6 +53,7 @@ public class ClientController {
 	return "accueil";
     }
 
+    // @Secured("ROLE_CLIENT")
     @RequestMapping("/goToMenuClient")
     private String gotoMenuClient(Model model) {
 	return "menuClient";
@@ -87,14 +86,16 @@ public class ClientController {
 	}
     }
 
+    // @Secured("ROLE_CLIENT")
     @RequestMapping("/goToRencontresAvenir")
     private String goToRencontresAvenir(Model model) {
 	Date now = new Date();
-	listeRencontres = rencontreRepo.findNextEvents(now);
+	List<Rencontre> listeRencontres = rencontreRepo.findNextEvents(now);
 	model.addAttribute("listeRencontres", listeRencontres);
 	return "rencontresAVenir";
     }
 
+    // @Secured("ROLE_CLIENT")
     @GetMapping("/goToPari/{id_rencontre}")
     public String goToPari(@PathVariable(value = "id_rencontre", required = true) Long id_rencontre, Model model) {
 	Pari pari = new Pari();
@@ -104,6 +105,7 @@ public class ClientController {
 	return "pari";
     }
 
+    // @Secured("ROLE_CLIENT")
     @PostMapping("/pari")
     private String Pari(@Valid @ModelAttribute(value = "pari") Pari pari, BindingResult result, Model model) {
 	if (pari.getSomme() > pari.getClient().getMontantMax()) {
@@ -113,7 +115,7 @@ public class ClientController {
 	    pariRepo.save(pari);
 	    model.addAttribute("pari", new Pari());
 	    Date now = new Date();
-	    // List<Rencontre> listeRencontres = rencontreRepo.findNextEvents(now);
+	    List<Rencontre> listeRencontres = rencontreRepo.findNextEvents(now);
 	    model.addAttribute("listeRencontres", listeRencontres);
 	    return "rencontresAVenir";
 	} else {
@@ -121,8 +123,8 @@ public class ClientController {
 	    return "pari";
 	}
     }
-    
-    
+
+    // @Secured("ROLE_CLIENT")
     @RequestMapping("/goToRencontresPariees")
     private String goToRencontresPariees(@ModelAttribute(value = "client") Client client, Model model) {
 	List<Pari> listePariByClient = pariRepo.findByClientId(AuthHelper.getClient().getId());
