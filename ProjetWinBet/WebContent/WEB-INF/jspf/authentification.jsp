@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html>
@@ -25,11 +26,11 @@
 	<div class="form-group">
 	<form method="POST" action="<c:url value="/login" />">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		<label for="username"><spring:message code="authentification.username"/></label>
-		<input type="text" name="username" value="" class="form-control">
+		<label for="username"><spring:message code="authentification.username"/></label><span class="required">*</span>
+		<input type="text" name="username" value="" class="form-control" required="required">
 		<br>
-		<label for="password"><spring:message code="authentification.password"/></label>
-		<input type="password" name="password" value="" class="form-control">
+		<label for="password"><spring:message code="authentification.password"/></label><span class="required">*</span>
+		<input type="password" name="password" value="" class="form-control" required="required">
 		<br>
 		<input type="submit" class="btn btn-primary" value="<spring:message code="authentification.submit" />" />
 		&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger" href="<c:url value="/welcome/goToAccueil" />"><spring:message code="authentification.retour" /></a>
