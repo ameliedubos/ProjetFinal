@@ -47,11 +47,13 @@
 
 
 		
-	<form method="POST" action="${pageContext.request.contextPath}/client/pari" modelAttribute="pari">
+	<form name="pari" method="POST" action="${pageContext.request.contextPath}/client/pari" modelAttribute="pari">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<div align="center">
 			<spring:message code="modifierRencontre.sport" />
 			<c:out value="${pari.rencontre.equipe1.sport.nom}" /><form:input type="hidden" path="pari.rencontre.equipe1.sport.nom" class="form-control" />
+			<form:input type="hidden" id="equipe1" path="pari.rencontre.equipe1.id" class="form-control" />
+			<form:input type="hidden" id="equipe2" path="pari.rencontre.equipe2.id" class="form-control" />
 		</div>
 		<div align="center">
 			<TABLE class="tablecreerpari">
@@ -89,8 +91,8 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td><c:out value="${pari.rencontre.cote1}" /><form:input type="hidden" path="pari.rencontre.cote1" class="form-control" /></td><td></td>
-					<td><c:out value="${pari.rencontre.cote2}" /><form:input type="hidden" path="pari.rencontre.cote2" class="form-control" /></td>
+					<td><c:out  value="${pari.rencontre.cote1}" /><form:input type="hidden" id="cote1" path="pari.rencontre.cote1" class="form-control" /></td><td></td>
+					<td><c:out value="${pari.rencontre.cote2}" /><form:input type="hidden" id="cote2" path="pari.rencontre.cote2" class="form-control" /></td>
 	
 				</tr>
 				<tr>					
@@ -122,17 +124,44 @@
 						</form:label></td>
 					<td></td>
 				</tr>
-		
-			
 				<tr>
-					<td><form:input path="pari.somme" class="form-control" />
+					<td><form:input id="somme" path="pari.somme" onkeyup="calculerGain();" class="form-control"/></td>
 					<td><form:errors path="pari.somme" cssClass="errors" /></td>
 					<td>
-					<form:select path="pari.vainqueur"  required="true">
+					<form:select id="vainqueur" path="pari.vainqueur" onchange="calculerGain();" required="true" >
 						<form:option value="${pari.rencontre.equipe1.id}"  label="${pari.rencontre.equipe1.nom}" />
 						<form:option value="${pari.rencontre.equipe2.id}"  label="${pari.rencontre.equipe2.nom}" />
 					</form:select></td>
 					<td><form:errors path="pari.vainqueur" cssClass="errors" /></td>
+				</tr>
+				<tr>
+				<td colspan="2">
+				<form:label path="pari.somme"><spring:message code="pariRencontre.gain" /></form:label>
+				</td>
+				<td>
+				<script>
+					function calculerGain(choix) {
+						var resultat;
+						var somme = document.getElementById('somme').value;
+						var cote1 = document.getElementById('cote1').value;
+						var cote2 = document.getElementById('cote2').value;
+						var equipe1 = document.getElementById('equipe1').value;
+						var equipe2 = document.getElementById('equipe2').value;
+						var e = document.getElementById('vainqueur');
+
+						var choice = e.selectedIndex;
+						var idVainqueur = e.options[choice].value;
+
+						if (idVainqueur == equipe1)
+							resultat = somme * cote1;
+						else
+							resultat = somme * cote2;
+						pari.gain.value = resultat
+					}
+				</script>
+				<input type="text" name="gain" class="form-control">
+				</td>
+				<td><spring:message code="rencontrePariees.devise" /></td>
 				</tr>
 			</TABLE>
 		</div>
