@@ -16,11 +16,28 @@
 <link href="<c:url value="/static/css/styles.css" />" rel="stylesheet">
 </head>
 <body>
+<div class="container">
+<br>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand titre"><spring:message code="accueil.titre" /></a>
+    </div>
+    <ul class="nav navbar-nav">
+    <li class="active"><a href="<c:url value="/admin/goToAccueil" />">Accueil</a></li>
+       <li class="active"><a href="<c:url value="/admin/goToMenuAdmin" />">Mon Menu</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span> <spring:message code="accueil.deconnecter" /></a></li>
+    </ul>
+  </div>
+</nav>
+<br>
 	<div align="center">
 		<h1>
-			<spring:message code="creerRencontre.titre" />
+			<spring:message code="saisirResultat.titre" />
 			<br>
-			<br>
+
 		</h1>
 	</div>
 	<br>
@@ -37,7 +54,7 @@
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<form:hidden path="rencontre.id"/>
 		<div align="center">
-			<TABLE BORDER=0><!-- Tableau 4 colonnes et 6 lignes -->
+			<TABLE class="tablecreerrencontre"><!-- Tableau 4 colonnes et 6 lignes -->
 				<tr>					
 					<td nowrap>
 					<form:label path="rencontre.equipe1.id">
@@ -87,11 +104,10 @@
 		</div>
 		<br>
 		<div align="center">
-			<input type="submit" class="btn btn-success" value="Valider" align="center" />
-			<br>
-			<br>
-			<a href="../goToMenuAdmin">Retour</a>
+			<input type="submit" class="btn btn-primary" value="Valider" align="center" />&nbsp;&nbsp;
+			<a class="btn btn-danger" href="<c:url value="/admin/goToMenuAdmin" />">Annuler</a>
 		</div>
 	</form>
+	</div>
 </body>
 </html>

@@ -4,6 +4,23 @@ font-size:16px;
 /* background-color: #e6f9ff; */
 }
 
+.slogan{
+	font-size:40px;
+	color: #004d99;
+	font-weight: bold;
+}
+
+.listesport{
+	font-size:25px;
+	color: #0066cc;
+}
+
+.tableaccueil { 
+	align:center;
+    border-spacing: 30px;
+    border-collapse: separate;
+}
+
 .tablecreerrencontre { 
 	align:center;
     border-spacing: 20px;

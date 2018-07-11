@@ -20,8 +20,10 @@ public class WelcomeController {
 
     @Autowired
     private IAdminJpaRepository AdminRepo;
+
     @Autowired
     private ISportJpaRepository sportRepo;
+
     @Autowired
     private IEquipeJpaRepository equipeRepo;
 
@@ -32,10 +34,7 @@ public class WelcomeController {
 	    List<Sport> listeSports = sportRepo.findAll();
 	    model.addAttribute("listeSports", listeSports);
 	    return "accueil";
-
-	}
-	// else if (AuthHelper.getRole().equals(ERole.ROLE_CLIENT))
-	else if (AuthHelper.getPrincipal().isAdministrateur())
+	} else if (AuthHelper.getPrincipal().isAdministrateur())
 
 	    return "redirect:/admin/goToMenuAdmin";
 	else
